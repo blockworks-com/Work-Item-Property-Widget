@@ -1,0 +1,80 @@
+﻿<!-- ---------------------------------------------------------------------
+// <copyright file="configuration.html">
+//    This code is licensed under the MIT License.
+//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+//    ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+//    TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+//    PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// </copyright>
+// <summary>
+// configuration
+// </summary>
+//---------------------------------------------------------------------
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="widget-configuration">
+        <div class="single-line-text-input" id="linewi">
+            <label>Work item Id</label>
+            <input type="text" id="wiid" required>
+            <span class="validation-error">
+                <span class="icon-error-exclamation"></span>
+                <span class="validation-error-text"></span>
+            </span>
+        </div>
+        <div class="single-line-text-input" id="linetitle">
+            <label>Title to display</label>
+            <input type="text" id="title" required>
+            <span class="validation-error">
+                <span class="icon-error-exclamation"></span>
+                <span class="validation-error-text"></span>
+            </span>
+        </div>
+        <div class="dropdown" id="lineproperty">
+            <label>Property Name to display</label>
+            <input type="text" id="wipropertyname" required>
+            <span class="validation-error">
+                <span class="icon-error-exclamation"></span>
+                <span class="validation-error-text"></span>
+            </span>
+        </div>
+        <div class="dropdown" id="dropdowncolorproperty">
+            <label>Status Color Property Name</label>
+            <div class="wrapper" id="wicolorpropertyname">
+            <span class="validation-error">
+                <span class="icon-error-exclamation"></span>
+                <span class="validation-error-text"></span>
+            </span>
+        </div>
+        <div class="single-line-text-input" id="linecolor2">
+            <label>Background Color</label>
+            <input type="text" id="color" required>
+            <span class="validation-error">
+                <span class="icon-error-exclamation"></span>
+                <span class="validation-error-text"></span>
+            </span>
+        </div>
+    </div>
+    <script src="../lib/VSS.SDK.js"></script>
+    <script src="../lib/ai.0.js"></script>
+    <script type="text/javascript">
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformStyles: true,
+            usePlatformScripts: true,
+            setupModuleLoader: true
+        });
+
+        VSS.ready(function () {
+            require(["dist/configuration"], function (configuration) { });
+        });
+    </script>
+</body>
+
+</html>

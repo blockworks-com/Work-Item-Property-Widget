@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28516.95
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSTS-Work-Item-Property-widget", "VSTS-Work-Item-Property-widget.csproj", "{5B2873F2-D09E-4CE4-8DC7-9A8D13A0BFC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B2873F2-D09E-4CE4-8DC7-9A8D13A0BFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2873F2-D09E-4CE4-8DC7-9A8D13A0BFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2873F2-D09E-4CE4-8DC7-9A8D13A0BFC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51D588CD-0CF1-448E-B3BD-2C143C7BEB04}
+	EndGlobalSection
+EndGlobal

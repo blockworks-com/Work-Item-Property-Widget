@@ -1,0 +1,16 @@
+﻿{
+  "compilerOptions": {
+    "module": "amd",
+    "moduleResolution": "node",
+    "target": "es5",
+    "rootDir": "scripts/",
+    "outDir": "dist/",
+    "removeComments": true,
+    "types": [
+      "vss-web-extension-sdk"
+    ]
+  },
+  "files": [
+    "scripts/WIDetailsWidget.ts","scripts/configuration.ts","scripts/menu.ts","scripts/isettings.d.ts"
+  ]
+}

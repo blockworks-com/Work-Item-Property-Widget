@@ -1,0 +1,37 @@
+{
+  "scripts": {
+    "build": "npm run copy-lib && npm run lint && npm run clean-before-build && npm run webpack",
+    "postbuild": "npm run clean-after-build",
+    "copy-lib": "cpx node_modules/telemetryclient-team-services-extension/lib/*.* scripts",
+    "package": "tfx extension create  --rev-version",
+    "gallery-publish": "tfx extension publish --rev-version",
+    "clean-before-build": "rimraf ./dist && rimraf ./*.vsix",
+    "clean-after-build": "rimraf ./scripts/telemetryclient.js && rimraf ./scripts/telemetryclient.d.ts",
+    "lint": "tslint -c tslint.json \"scripts/*.ts",
+    "webpack": "webpack --progress --colors --config webpack.config.js --output-path ./dist -p"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "cpx": "^1.5.0",
+    "jasmine": "^2.5.1",
+    "rimraf": "^2.5.4",
+    "tfx-cli": "^0.6.4",
+    "ts-loader": "^2.0.3",
+    "tslint": "^4.3.1",
+    "tslint-loader": "^3.3.0",
+    "typescript": "^2.3.4",
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "@types/jquery": "^2.0.34",
+    "@types/q": "0.0.32",
+    "applicationinsights-js": "*",
+    "jquery": "^2.2.0",
+    "jquery-dotdotdot": "^1.8.2",
+    "telemetryclient-team-services-extension": "*",
+    "vss-web-extension-sdk": "^2.115.0"
+  },
+  "name": "widetails",
+  "private": true,
+  "version": "0.0.1"
+}
