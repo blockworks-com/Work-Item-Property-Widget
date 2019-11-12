@@ -1,0 +1,43 @@
+# Node.js with webpack
+# Build a Node.js project using the webpack CLI.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+variables:
+  subscription: 'TODO'
+
+stages:
+- stage: build
+  displayName: 'Build'
+  jobs:
+  - job: run_build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: TfxInstaller@2
+      inputs:
+        version: 'v0.6.x'
+    - script: dir
+    - script: dir $(System.DefaultWorkingDirectory)
+    - script: dir $(Build.SourcesDirectory)
+    - script: pwd
+    - task: PackageAzureDevOpsExtension@2
+      inputs:
+        rootFolder: 
+        localizationRoot: '$(Build.SourcesDirectory)'
+        patternManifest: 'vss-extension.json'
+        updateTasksVersion: false
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          *.vsix
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
+        cleanTargetFolder: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)/release
+        artifactName: release
