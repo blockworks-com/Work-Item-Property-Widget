@@ -27,7 +27,6 @@ stages:
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: 
-        localizationRoot: '$(Build.SourcesDirectory)'
         patternManifest: 'vss-extension.json'
         updateTasksVersion: false
     - task: CopyFiles@2
