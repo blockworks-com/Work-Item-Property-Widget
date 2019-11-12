@@ -29,7 +29,7 @@
     "jquery": "^2.2.0",
     "jquery-dotdotdot": "^1.8.2",
     "telemetryclient-team-services-extension": "*",
-    "vss-web-extension-sdk": "^2.115.0"
+    "vss-web-extension-sdk": "^2.117.0"
   },
   "name": "widetails",
   "private": true,
