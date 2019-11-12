@@ -20,6 +20,9 @@ stages:
     - task: TfxInstaller@2
       inputs:
         version: 'v0.6.x'
+    - task: Npm@1
+      inputs:
+        command: 'install'
     - script: dir
     - script: dir $(System.DefaultWorkingDirectory)
     - script: dir $(Build.SourcesDirectory)
