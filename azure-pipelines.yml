@@ -17,6 +17,10 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - bash: |
+        echo "##vso[build.updatebuildnumber]Release $(Version)"
+        condition: eq(variables['release.enabled'], 'true')
+        name: SetReleaseBuildName
     - task: TfxInstaller@2
       inputs:
         version: 'v0.6.x'
@@ -25,7 +29,7 @@ stages:
         command: 'install'
     - task: PackageAzureDevOpsExtension@2
       inputs:
-        rootFolder: 
+        rootFolder: '$(Build.SourcesDirectory)'
         patternManifest: 'vss-extension.json'
         updateTasksVersion: true
         extensionVersion: '$(Build.BuildNumber)'
