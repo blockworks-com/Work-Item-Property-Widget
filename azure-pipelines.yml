@@ -28,7 +28,6 @@ stages:
         rootFolder: '$(Build.SourcesDirectory)'
         patternManifest: 'vss-extension.json'
         updateTasksVersion: true
-        extensionVersion: '$(Build.BuildNumber)'
         updateTasksVersionType: patch
     - task: CopyFiles@2
       inputs:
