@@ -1,13 +1,13 @@
 {
   "manifestVersion": 1,
-  "id": "work-item-property-widget",
-  "version": "0.0.98",
-  "name": "View a work item property on your dashboard.",
+  "id": "dev-work-item-property-widget",
+  "version": "0.0.97",
+  "name": "Dev: View a work item property on your dashboard.",
   "scopes": [
     "vso.work",
     "vso.dashboards_manage"
   ],
-  "description": "View a work item property on your dashboard.",
+  "description": "Dev: View a work item property on your dashboard.",
   "publisher": "blockworks-com",
   "icons": {
     "default": "static/images/logo.png"
@@ -107,8 +107,8 @@
         ".widetailswidget-Configuration"
       ],
       "properties": {
-        "name": "Work Item Details",
-        "description": "View details of work item on your dashboard.",
+        "name": "Dev: Work Item Details",
+        "description": "Dev: View details of work item on your dashboard.",
         "uri": "static/index.html",
         "isNameConfigurable": false,
         "catalogIconUrl:": "static/images/logo.png",
