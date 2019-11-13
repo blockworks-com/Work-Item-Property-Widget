@@ -17,16 +17,20 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - bash: |
-        echo "##vso[build.updatebuildnumber]Release $(Version)"
-        condition: eq(variables['release.enabled'], 'true')
-        name: SetReleaseBuildName
     - task: TfxInstaller@2
       inputs:
         version: 'v0.6.x'
     - task: Npm@1
       inputs:
         command: 'install'
+    - task: QueryAzureDevOpsExtensionVersion@2
+      inputs:
+        connectTo: 'VsTeam'
+        connectedServiceName: 'vs-marketplace-blockworks-com'
+        publisherId: 'blockworks-com'
+        extensionId: 'work-item-property-widget'
+        versionAction: 'Patch'
+        setBuildNumber: 'true'
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
