@@ -23,15 +23,11 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-    - script: dir
-    - script: dir $(System.DefaultWorkingDirectory)
-    - script: dir $(Build.SourcesDirectory)
-    - script: pwd
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: 
         patternManifest: 'vss-extension.json'
-        updateTasksVersion: false
+        updateTasksVersion: true
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
