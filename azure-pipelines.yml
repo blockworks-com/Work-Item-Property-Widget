@@ -29,10 +29,6 @@ stages:
         patternManifest: 'vss-extension.json'
         updateTasksVersion: true
         updateTasksVersionType: patch
-        publisherId: '$(PublisherId)'
-        extensionId: '$(ExtensionId)'
-        extensionName: '$(ExtensionName)'
-        extensionVersion: '$(Version)'
     - script: echo $(PublisherId)...$(Extension)...$(ExtensionName)...$(Version)
     - task: CopyFiles@2
       inputs:
