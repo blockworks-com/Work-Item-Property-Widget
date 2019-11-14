@@ -33,7 +33,7 @@ stages:
         extensionVersion: '$(Build.BuildNumber)'
         updateTasksVersion: true
         updateTasksId: true
-        extensionVisibility: 'public'
+        extensionVisibility: 'private'
         extensionPricing: 'free'
 
 # DEV Second
