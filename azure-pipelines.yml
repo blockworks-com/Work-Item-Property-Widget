@@ -23,16 +23,8 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-    - task: PackageAzureDevOpsExtension@2
-      inputs:
-        rootFolder: '$(Build.SourcesDirectory)'
-        publisherId: '$(PublisherId)'
-        extensionId: '$(ExtensionId)'
-        extensionVersion: '$(Build.BuildNumber)'
-        extensionTag: '-DEV'
-        updateTasksVersion: true
-        extensionVisibility: 'private'
-        extensionPricing: 'free'
+
+# Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
@@ -42,6 +34,25 @@ stages:
         updateTasksVersion: true
         updateTasksId: true
         extensionVisibility: 'public'
+        extensionPricing: 'free'
+
+# DEV Second
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: 'vss-extension.json'
+        FindRegex: '"description": "'
+        ReplaceRegex: '"description": "DEV: '
+        UseUTF8: true
+        UseRAW: true
+    - task: PackageAzureDevOpsExtension@2
+      inputs:
+        rootFolder: '$(Build.SourcesDirectory)'
+        publisherId: '$(PublisherId)'
+        extensionId: '$(ExtensionId)'
+        extensionVersion: '$(Build.BuildNumber)'
+        extensionTag: '-DEV'
+        updateTasksVersion: true
+        extensionVisibility: 'private'
         extensionPricing: 'free'
     - task: CopyFiles@2
       inputs:
