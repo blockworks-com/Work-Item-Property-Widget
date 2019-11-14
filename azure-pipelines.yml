@@ -6,7 +6,8 @@
 trigger:
 - master
 
-name: $(Major).$(Minor).$(Rev:r)
+#name: $(Major).$(Minor).$(Rev:r)
+name: $(Build.DefinitionName)_$(Major).$(Minor).$(Year:yy)$(DayOfYear).$(rev:r)
 
 stages:
 - stage: build
