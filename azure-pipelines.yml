@@ -37,7 +37,7 @@ stages:
         publisherId: '$(PublisherId)'
         extensionId: '$(ExtensionId)'
         extensionVersion: '$(Build.BuildNumber)'
-        extensionTag: 'DEV'
+        extensionTag: '-DEV'
         updateTasksVersion: true
         extensionVisibility: 'private'
         extensionPricing: 'free'
