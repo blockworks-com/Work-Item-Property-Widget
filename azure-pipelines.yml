@@ -23,14 +23,6 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-    - task: VersionVSIX@2
-      inputs:
-        Path: '$(Build.SourcesDirectory)'
-        VersionNumber: '$(Build.BuildNumber)'
-        UseRegex: true
-        DigitMode: 'All'
-        VersionRegex: '\d+\.\d+\.\d+'
-        OutputVersion: 'OutputedVersion'
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
