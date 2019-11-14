@@ -17,16 +17,6 @@ stages:
     pool:
       vmImage: 'vs2017-win2016'
     steps:
-
-    - task: VersionVSIX@2
-      inputs:
-        Path: '$(Build.SourcesDirectory)'
-        VersionNumber: '$(Build.BuildNumber)'
-        UseRegex: true
-        DigitMode: 'All'
-        VersionRegex: '\d+\.\d+\.\d+\.\d+'
-        OutputVersion: 'OutputedVersion'
-
     - task: TfxInstaller@2
       inputs:
         version: 'v0.6.x'
@@ -40,6 +30,14 @@ stages:
         updateTasksVersion: true
         updateTasksVersionType: patch
     - script: echo $(PublisherId)...$(Extension)...$(ExtensionName)...$(Version)
+    - task: VersionVSIX@2
+      inputs:
+        Path: '$(Build.SourcesDirectory)'
+        VersionNumber: '$(Build.BuildNumber)'
+        UseRegex: true
+        DigitMode: 'All'
+        VersionRegex: '\d+\.\d+\.\d+\.\d+'
+        OutputVersion: 'OutputedVersion'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
