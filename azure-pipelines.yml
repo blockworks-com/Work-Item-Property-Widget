@@ -7,7 +7,7 @@ trigger:
 - master
 
 #name: $(Major).$(Minor).$(Rev:r)
-name: $(ExtensionId)_$(Major).$(Minor).$(rev:r)
+name: _$(Major).$(Minor).$(rev:r)
 
 stages:
 - stage: build
