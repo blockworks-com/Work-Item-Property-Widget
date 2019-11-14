@@ -33,8 +33,9 @@ stages:
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
-        publisherId: 'blockworks-com'
-        extensionId: 'work-item-property-widget'
+        publisherId: '$(PublisherId)'
+        extensionId: '$(ExtensionId)'
+        extensionVersion: '$(Build.BuildNumber)'
         updateTasksVersion: true
         updateTasksId: true
         extensionVisibility: 'private'
