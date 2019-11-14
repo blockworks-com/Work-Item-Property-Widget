@@ -39,7 +39,7 @@ stages:
         publisherId: '$(PublisherId)'
         extensionId: '$(ExtensionId)'
         extensionVersion: '$(Build.BuildNumber)'
-        updateTasksVersion: false
+        updateTasksVersion: true
         updateTasksId: true
         extensionVisibility: 'public'
         extensionPricing: 'free'
