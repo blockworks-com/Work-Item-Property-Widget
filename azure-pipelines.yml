@@ -6,10 +6,7 @@
 trigger:
 - master
 
-name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
-
-variables:
-  subscription: 'TODO'
+name: $(Major).$(Minor).$(Rev:.r)
 
 stages:
 - stage: build
@@ -25,13 +22,6 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-    - task: PackageAzureDevOpsExtension@2
-      inputs:
-        rootFolder: '$(Build.SourcesDirectory)'
-        patternManifest: 'vss-extension.json'
-        updateTasksVersion: true
-        updateTasksVersionType: patch
-    - script: echo $(PublisherId)...$(Extension)...$(ExtensionName)...$(Version)
     - task: VersionVSIX@2
       inputs:
         Path: '$(Build.SourcesDirectory)'
@@ -40,6 +30,15 @@ stages:
         DigitMode: 'All'
         VersionRegex: '\d+\.\d+\.\d+\.\d+'
         OutputVersion: 'OutputedVersion'
+    - task: PackageAzureDevOpsExtension@2
+      inputs:
+        rootFolder: '$(Build.SourcesDirectory)'
+        publisherId: 'blockworks-com'
+        extensionId: 'work-item-property-widget'
+        updateTasksVersion: true
+        updateTasksId: true
+        extensionVisibility: 'private'
+        extensionPricing: 'free'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
