@@ -6,6 +6,8 @@
 trigger:
 - master
 
+name: $(Major).$(Minor).$(rev:r)  # build numbering format
+
 variables:
   subscription: 'TODO'
 
