@@ -42,7 +42,7 @@ stages:
         InputSearchPattern: 'vss-extension.json'
         FindRegex: '"description": "'
         ReplaceRegex: '"description": "DEV: '
-        UseUTF8: true
+        UseUTF8: false
         UseRAW: true
     - task: PackageAzureDevOpsExtension@2
       inputs:
