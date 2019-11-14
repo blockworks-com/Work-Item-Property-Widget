@@ -44,6 +44,13 @@ stages:
         ReplaceRegex: '"description": "DEV: '
         UseUTF8: false
         UseRAW: true
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: 'vss-extension.json'
+        FindRegex: '"name": "'
+        ReplaceRegex: '"name": "DEV: '
+        UseUTF8: false
+        UseRAW: true
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
