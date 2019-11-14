@@ -15,7 +15,7 @@ stages:
   jobs:
   - job: run_build
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'vs2017-win2016'
     steps:
     - task: TfxInstaller@2
       inputs:
