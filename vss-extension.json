@@ -42,7 +42,7 @@
   },
   "content": {
     "license": {
-      "path": "mp_terms.md"
+      "path": "license.md"
     },
     "details": {
       "path": "overview.md"
@@ -51,10 +51,6 @@
   "files": [
     {
       "path": "overview.md",
-      "addressable": true
-    },
-    {
-      "path": "ThirdPartyNotices.txt",
       "addressable": true
     },
     {
