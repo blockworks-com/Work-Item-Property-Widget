@@ -1,6 +1,6 @@
-## Work Item Details Widget ##
+## Work Item Property Widget ##
 
-The **Work Item Details Widget** displays a card with some details of an Work item on your dashboards.
+The **Work Item Property Widget** displays a card with some details of an Work item on your dashboards.
 
 ![detailed cards](/static/images/detailed-cards.png)
 
