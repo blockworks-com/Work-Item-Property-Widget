@@ -1,4 +1,5 @@
 node_modules
 obj
 .vs
+_archive
 *.vsix
