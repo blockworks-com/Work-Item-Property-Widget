@@ -6,7 +6,7 @@
 //    TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 //    PARTICULAR PURPOSE AND NONINFRINGEMENT.
 // </copyright>
-// <summary>TypeScript file for work item details widget extension</summary>
+// <summary>TypeScript file for Work Item Property Widget extension</summary>
 // ---------------------------------------------------------------------
 "use strict";
 import Services = require("VSS/Authentication/Services");

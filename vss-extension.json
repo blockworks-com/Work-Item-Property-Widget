@@ -30,6 +30,12 @@
     },
     "issues": {
       "uri": "https://github.com/blockworks-com/Work-Item-Property-Widget/issues"
+    },
+    "getstarted": {
+      "uri": "https://github.com/blockworks-com/Work-Item-Property-Widget/wiki"
+    },
+    "support": {
+      "uri": "https://github.com/blockworks-com/Work-Item-Property-Widget/issues"
     }
   },
   "repository": {
@@ -268,7 +274,7 @@
       ],
       "properties": {
         "name": "Work Item Details Configuration",
-        "description": "Configure Work Item Details widget.",
+        "description": "Configure Work Item Property Widget.",
         "uri": "static/configuration.html"
       }
     }
