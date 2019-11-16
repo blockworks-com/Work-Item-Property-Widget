@@ -102,10 +102,11 @@ export class Configuration {
                         this.$wipropertyname[0].appendChild(opt);
                     }
 
-                    if (settings && settings.wipropertyname) {
-                        this.$wipropertyname.val(settings.wipropertyname);
+                    if (settings && settings.wiPropertyName) {
+                        $wipropertyname.val(settings.wiPropertyName);
                     } else {
-                        this.$wipropertyname.val("");
+                        // first load
+                        $wipropertyname.val("");
                     }
                 });
 
@@ -213,10 +214,11 @@ export class Configuration {
                     this.$wipropertyname[0].appendChild(opt);
                 }
 
-                if (settings && settings.wipropertyname) {
-                    this.$wipropertyname.val(settings.wipropertyname);
+                if (settings && settings.wiPropertyName) {
+                    $wipropertyname.val(settings.wiPropertyName);
                 } else {
-                    this.$wipropertyname.val("");
+                    // first load
+                    $wipropertyname.val("");
                 }
             });
 
