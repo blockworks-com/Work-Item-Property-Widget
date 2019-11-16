@@ -212,7 +212,13 @@ export class Configuration {
                     opt.value = field;
                     this.$wipropertyname[0].appendChild(opt);
                 }
-                });
+
+                if (settings && settings.wipropertyname) {
+                    this.$wipropertyname.val(settings.wipropertyname);
+                } else {
+                    this.$wipropertyname.val("");
+                }
+            });
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
                 Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
