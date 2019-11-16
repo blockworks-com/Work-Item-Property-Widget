@@ -100,7 +100,7 @@ export class Configuration {
                 console.log("Config:load step 25");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
                     Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
-                    fieldList, $wicolorpropertyname.val()));
+                    fieldList, $wipropertyname.val()));
                 });
 
                 console.log("Config:load step 30");
