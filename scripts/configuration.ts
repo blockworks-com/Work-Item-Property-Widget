@@ -306,6 +306,7 @@ console.log("Config:getSortedFieldList2 step 10");
     }
 
     public getCustomSettings() {
+console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val());
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
@@ -347,9 +348,9 @@ console.log("Config:getSortedFieldList2 step 10");
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
 
-        console.log("Config:onSave " + this.$wipropertyname.val());
-        console.log("Config:onSave " + this.$wicolorpropertyname.val());
-        console.log("Config:onSave " + $("#wipropertyname").val());
+        console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val());
+        console.log("Config:onSave wicolorpropertyname: " + this.$wicolorpropertyname.val());
+        console.log("Config:onSave wipropertyname: " + $("#wipropertyname").val());
 
         let customSettings = this.getCustomSettings();
         return this.WidgetHelpers.WidgetConfigurationSave.Valid(customSettings);
