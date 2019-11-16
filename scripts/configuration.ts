@@ -282,7 +282,9 @@ console.log("Config:getSortedFieldList2 step 10");
     // getComboOptions("colorpropertyname", fieldList, $wicolorpropertyname.val())
     private getComboOptions(id, fieldsList, initialField): IComboOptions {
         console.log("Config:getComboOptions step 10");
+        console.log("Config:getComboOptions initialField: " + initialField);
         let that = this;
+        console.log("Config:getComboOptions getFieldName(initialField): " + that.getFieldName(initialField));
         return {
             id: id,
             mode: "drop",
