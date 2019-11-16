@@ -93,8 +93,6 @@ export class Configuration {
 
                 console.log("Config:load step 20");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
-//                    Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
-//                    fieldList, $wipropertyname.val()));
                     for (const field of fieldList) {
                         const opt = document.createElement("option");
                         opt.innerHTML = field;
@@ -112,8 +110,19 @@ export class Configuration {
 
                 console.log("Config:load step 25");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
-                    Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
-                    fieldList, $wicolorpropertyname.val()));
+                    for (const field of fieldList) {
+                        const opt = document.createElement("option");
+                        opt.innerHTML = field;
+                        opt.value = field;
+                        this.$wicolorpropertyname[0].appendChild(opt);
+                    }
+
+                    if (settings && settings.wiColorPropertyName) {
+                        $wicolorpropertyname.val(settings.wiColorPropertyName);
+                    } else {
+                        // first load
+                        $wicolorpropertyname.val("");
+                    }
                 });
 
                 console.log("Config:load step 30");
@@ -200,13 +209,8 @@ export class Configuration {
         console.log("Config:load step 100");
         this.clientwi.getWorkItem($wiid.val()).then((wi) => {
             console.log("Config:load step 110");
-//            for (let entry in wi.fields) {
-//                console.log("Config:load entry: " + entry);
-//            }
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
-//                    Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
-//                    fieldList, $wipropertyname.val()));
                 for (const field of fieldList) {
                     const opt = document.createElement("option");
                     opt.innerHTML = field;
@@ -223,10 +227,20 @@ export class Configuration {
             });
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
-                Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
-                fieldList, $wicolorpropertyname.val()));
-            });
+                for (const field of fieldList) {
+                    const opt = document.createElement("option");
+                    opt.innerHTML = field;
+                    opt.value = field;
+                    this.$wicolorpropertyname[0].appendChild(opt);
+                }
 
+                if (settings && settings.wiColorPropertyName) {
+                    $wicolorpropertyname.val(settings.wiColorPropertyName);
+                } else {
+                    // first load
+                    $wicolorpropertyname.val("");
+                }
+            });
         });
 
         return _that.WidgetHelpers.WidgetStatusHelper.Success();
