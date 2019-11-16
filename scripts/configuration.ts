@@ -101,6 +101,12 @@ export class Configuration {
                         opt.value = field;
                         this.$wipropertyname[0].appendChild(opt);
                     }
+
+                    if (settings && settings.wipropertyname) {
+                        this.$wipropertyname.val(settings.wipropertyname);
+                    } else {
+                        this.$wipropertyname.val("");
+                    }
                 });
 
                 console.log("Config:load step 25");
