@@ -87,7 +87,7 @@ export class Configuration {
         _that.$wiid.blur(() => {
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
-        console.log("Config:construct step 10");
+        console.log("Config:load step 10");
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
@@ -169,11 +169,11 @@ export class Configuration {
             });
         });
 
-        console.log("Config:construct step 100");
+        console.log("Config:load step 100");
         this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-            console.log("Config:construct step 110");
+            console.log("Config:load step 110");
 //            for (let entry in wi.fields) {
-//                console.log("Config:construct entry: " + entry);
+//                console.log("Config:load entry: " + entry);
 //            }
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
