@@ -91,6 +91,19 @@ export class Configuration {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
+                console.log("Config:load step 20");
+                this.getSortedFieldsList2(wi).then((fieldList) => {
+                    Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
+                    fieldList, $wipropertyname.val()));
+                });
+
+                console.log("Config:load step 25");
+                this.getSortedFieldsList2(wi).then((fieldList) => {
+                    Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
+                    fieldList, $wicolorpropertyname.val()));
+                });
+    
+                console.log("Config:load step 30");
                 _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
                     _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
 
