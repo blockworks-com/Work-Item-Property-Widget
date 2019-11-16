@@ -102,7 +102,7 @@ export class Configuration {
                     Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
                     fieldList, $wicolorpropertyname.val()));
                 });
-    
+
                 console.log("Config:load step 30");
                 _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
                     _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));

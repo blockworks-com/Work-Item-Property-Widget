@@ -2,3 +2,4 @@
 
 This is a fork of https://github.com/ALM-Rangers/Work-Item-Details-Widget-Extension with the ability to show a specific property.
 
+Requires using Typescript 2.3.4
