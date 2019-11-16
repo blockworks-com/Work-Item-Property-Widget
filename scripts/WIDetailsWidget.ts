@@ -47,7 +47,8 @@ export class WidgetWIDetails {
             // Main
             this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
 
-console.log("Work Item Property: " + customSettings.wiPropertyName
+console.log("WorkItemDetailWidget:LoadWIDetails step 1");
+console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings.wiPropertyName
 + "; color prop: " + customSettings.wiColorPropertyName + "; color: " + customSettings.color
 + "; title: " + customSettings.title);
 
@@ -110,7 +111,7 @@ console.log("Work Item Property: " + customSettings.wiPropertyName
         if (colorstring !== "") {
             $("#content").attr("style", "background-color: " + colorstring + ";");
             color = colorstring;
-            console.log("Work Item color prop: " + colorfield + "; value: " + color + "; color: " + colorstring);
+            console.log("WorkItemDetailWidget:DisplayWIDetails color prop: " + colorfield + "; value: " + color + "; color: " + colorstring);
         }
 
 //        $("#wi-header").attr("style", "border-left-color: " + color + ";");
@@ -176,7 +177,7 @@ console.log("Work Item Property: " + customSettings.wiPropertyName
             default:
                 witColor = workItemType;
         }
-        console.log("Work Item getWorkItemColor result: " + witColor);
+        console.log("WorkItemDetailWidget:getWorkItemColor result: " + witColor);
         return witColor;
     }
 

@@ -34,9 +34,7 @@ export class WiMenu {
                 dataType: "json",
                 data: `api-version=3.0-preview.2`,
                 success: c => {
-                    // console.log(c.dashboardEntries);
                     deferred.resolve(c.dashboardEntries);
-
                 },
                 error: e => {
                     tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(e.response);
@@ -98,7 +96,7 @@ export class WiMenu {
                     contentType: "application/json; charset=utf-8",
                     data: toSend,
                     success: c => {
-                        console.log("WorkItemDetailWidget: WI " + wiid + " is added to Dashboard " + dashboard.name);
+                        console.log("menu:addWidgetToDashboard: WI " + wiid + " is added to Dashboard " + dashboard.name);
                         deferred.resolve(c);
                     },
                     error: e => {

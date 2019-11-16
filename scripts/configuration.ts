@@ -87,7 +87,7 @@ export class Configuration {
         _that.$wiid.blur(() => {
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
-        console.log("Work Item step 34468");
+        console.log("Config:construct step 10");
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
@@ -169,11 +169,11 @@ export class Configuration {
             });
         });
 
-        console.log("Work Item step 765");
+        console.log("Config:construct step 100");
         this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-            console.log("Work Item step 53436");
+            console.log("Config:construct step 110");
 //            for (let entry in wi.fields) {
-//                console.log(entry);
+//                console.log("Config:construct entry: " + entry);
 //            }
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
@@ -192,6 +192,7 @@ export class Configuration {
     }
 
     private isValidWI(): IPromise<boolean> {
+console.log("Config:isValidWI step 10");
         let deferred = $.Deferred<boolean>();
 
         if ($("#wiid").val() !== "") {
@@ -210,6 +211,7 @@ export class Configuration {
     }
 
     private getSortedFieldsList(): IPromise<any> {
+        console.log("Config:getSortedFieldList step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields().then((fields: Contracts.WorkItemField[]) => {
@@ -232,6 +234,7 @@ export class Configuration {
     }
 
     private getSortedFieldsList2(wi): IPromise<any> {
+console.log("Config:getSortedFieldList2 step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields(wi.project).then((fields: Contracts.WorkItemField[]) => {
@@ -265,6 +268,7 @@ export class Configuration {
 
     // getComboOptions("colorpropertyname", fieldList, $wicolorpropertyname.val())
     private getComboOptions(id, fieldsList, initialField): IComboOptions {
+        console.log("Config:getComboOptions step 10");
         let that = this;
         return {
             id: id,
@@ -279,8 +283,7 @@ export class Configuration {
 
                 switch (this._id) {
                     case "colorpropertyname":
-                        console.log("Work Property 37464: " + fieldName);
-                        console.log("Work Property 37464: " + fieldReferenceName);
+                        console.log("Config:getComboOptions fieldName: " + fieldName + "; refname: " + fieldReferenceName);
                         that.$wicolorpropertyname.val(fieldName);
                         break;
                 }
@@ -331,10 +334,9 @@ export class Configuration {
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
 
-        console.log("Work Property " + this.$wipropertyname.val());
-        console.log("Work Property " + this.$wicolorpropertyname.val());
-        console.log("Work Property " + $("#wipropertyname").val());
-        // console.log("Work Property ");
+        console.log("Config:onSave " + this.$wipropertyname.val());
+        console.log("Config:onSave " + this.$wicolorpropertyname.val());
+        console.log("Config:onSave " + $("#wipropertyname").val());
 
         let customSettings = this.getCustomSettings();
         return this.WidgetHelpers.WidgetConfigurationSave.Valid(customSettings);
