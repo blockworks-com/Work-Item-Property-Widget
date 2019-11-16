@@ -93,8 +93,14 @@ export class Configuration {
 
                 console.log("Config:load step 20");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
-                    Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
-                    fieldList, $wipropertyname.val()));
+//                    Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
+//                    fieldList, $wipropertyname.val()));
+                    for (const field of fieldList) {
+                        const opt = document.createElement("option");
+                        opt.innerHTML = field;
+                        opt.value = field;
+                        this.$wipropertyname[0].appendChild(opt);
+                    }
                 });
 
                 console.log("Config:load step 25");
@@ -192,9 +198,15 @@ export class Configuration {
 //            }
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
-                Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
-                fieldList, $wipropertyname.val()));
-            });
+//                    Controls.create(Combo, $wipropertyname, this.getComboOptions("wipropertyname",
+//                    fieldList, $wipropertyname.val()));
+                for (const field of fieldList) {
+                    const opt = document.createElement("option");
+                    opt.innerHTML = field;
+                    opt.value = field;
+                    this.$wipropertyname[0].appendChild(opt);
+                }
+                });
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
                 Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
@@ -271,6 +283,29 @@ console.log("Config:getSortedFieldList2 step 10");
         return deferred.promise;
     }
 
+    private getSortedFieldsList3(wi): IPromise<any> {
+console.log("Config:getSortedFieldList3 step 10");
+        let deferred = Q.defer();
+        let client = RestClientWI.getClient();
+        client.getFields(wi.project).then((fields: Contracts.WorkItemField[]) => {
+            this._fields = fields.filter(field => (field.type === field.type));
+            let sortedFields = this._fields.map(field => field.referenceName).sort((field1, field2) => {
+                if (field1 > field2) {
+                    return 1;
+                }
+
+                if (field1 < field2) {
+                    return -1;
+                }
+
+                return 0;
+            });
+            deferred.resolve(sortedFields);
+        });
+
+        return deferred.promise;
+    }
+
     private getFieldName(fieldReferenceName): string {
         let matchingFields = this._fields.filter(field => field.referenceName === fieldReferenceName);
         return (matchingFields.length > 0) ? matchingFields[0].name : null;
@@ -296,7 +331,8 @@ console.log("Config:getSortedFieldList2 step 10");
 //            value: that.getFieldName(initialField),
             value: initialField,
             change: function () {
-//                that._changeMade = true;
+                that.widgetConfigurationContext.notify(that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                    that.WidgetHelpers.WidgetEvent.Args(that.getCustomSettings()));
 //                let fieldName = this.getText();
                 let fieldName = this.value;
                 let fieldReferenceName: string = (this.getSelectedIndex() < 0) ? null : that.getFieldReferenceName(fieldName);
