@@ -121,6 +121,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#linetitle .validation-error-text");
         _that.$title.blur(() => {
+            console.log("Config:load linetitle:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -142,6 +143,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#dropdownproperty .validation-error-text");
         _that.$wipropertyname.blur(() => {
+            console.log("Config:load dropdownproperty:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
