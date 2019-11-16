@@ -87,6 +87,8 @@ export class Configuration {
         _that.$wiid.blur(() => {
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
+        console.log("Work Item step 34468");
+
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
                 _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
