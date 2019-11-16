@@ -100,7 +100,7 @@ export class Configuration {
                 console.log("Config:load step 25");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
                     Controls.create(Combo, $wicolorpropertyname, this.getComboOptions("colorpropertyname",
-                    fieldList, $wipropertyname.val()));
+                    fieldList, $wicolorpropertyname.val()));
                 });
 
                 console.log("Config:load step 30");
@@ -140,7 +140,7 @@ export class Configuration {
             });
         });
 
-        $errorSingleLineInput = $("#lineproperty .validation-error-text");
+        $errorSingleLineInput = $("#dropdownproperty .validation-error-text");
         _that.$wipropertyname.blur(() => {
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
@@ -161,7 +161,7 @@ export class Configuration {
             });
         });
 
-        $errorSingleLineInput = $("#linecolor .validation-error-text");
+        $errorSingleLineInput = $("#dropdowncolorproperty .validation-error-text");
         _that.$wicolorpropertyname.blur(() => {
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
