@@ -291,7 +291,8 @@ console.log("Config:getSortedFieldList2 step 10");
             mode: "drop",
             source: fieldsList,
             enabled: true,
-            value: that.getFieldName(initialField),
+//            value: that.getFieldName(initialField),
+            value: initialField,
             change: function () {
 //                that._changeMade = true;
 //                let fieldName = this.getText();
