@@ -17,6 +17,13 @@ stages:
     pool:
       vmImage: 'vs2017-win2016'
     steps:
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: 'telemetryClientSettings.ts'
+        FindRegex: '__INSTRUMENTATIONKEY__'
+        ReplaceRegex: '$(TelemetryKey)'
+        UseUTF8: false
+        UseRAW: true
     - task: TfxInstaller@2
       inputs:
         version: 'v0.6.x'
