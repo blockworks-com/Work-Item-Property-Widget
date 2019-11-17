@@ -14,7 +14,7 @@ import * as tc from "telemetryclient-team-services-extension";
 
 export const settings: tc.TelemetryClientSettings = {
     key: "__INSTRUMENTATIONKEY__",
-    extensioncontext: "WorkItemDetailsWidget",
+    extensioncontext: "WorkItemPropertyWidget",
     disableTelemetry: "true",
     disableAjaxTracking: "__disableAjaxTracking__",
     enableDebug: "__enableDebug__"
