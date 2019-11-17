@@ -74,12 +74,12 @@ stages:
         artifactName: release
 
 # Publish DEV only in CI
-    - task: PublishAzureDevOpsExtension@2
-      inputs:
-        connectTo: 'VsTeam'
-        connectedServiceName: 'vs-marketplace-blockworks-com'
-        fileType: 'vsix'
-        vsixFile: '*-DEV*.vsix'
-        extensionVisibility: 'private'
-        extensionPricing: 'free'
-        shareWith: 'dev2-blockworkscom'
+#    - task: PublishAzureDevOpsExtension@2
+#      inputs:
+#        connectTo: 'VsTeam'
+#        connectedServiceName: 'vs-marketplace-blockworks-com'
+#        fileType: 'vsix'
+#        vsixFile: '*-DEV*.vsix'
+#        extensionVisibility: 'private'
+#        extensionPricing: 'free'
+#        shareWith: 'dev2-blockworkscom'
