@@ -19,7 +19,9 @@ stages:
     steps:
     - task: RegexReplace@3
       inputs:
-        InputSearchPattern: 'telemetryClientSettings.ts'
+        InputSearchPattern: |
+          **\*.ts
+          **\*.js
         FindRegex: '__INSTRUMENTATIONKEY__'
         ReplaceRegex: '$(TelemetryKey)'
         UseUTF8: false
