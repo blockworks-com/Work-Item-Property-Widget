@@ -34,9 +34,11 @@ stages:
     - task: Npm@1
       inputs:
         command: 'custom'
-        workingDir: '$(Build.SourcesDirectory)'
         customCommand: 'run build'
-# Prod First
+    - script: |
+        npm run build
+      displayName: 'npm build'
+  # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
