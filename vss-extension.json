@@ -1,8 +1,8 @@
 {
   "manifestVersion": 1,
-  "id": "work-item-property-widget",
+  "id": "wi-property-widget",
   "version": "0.0.101",
-  "name": "View a work item property on your dashboard.",
+  "name": "Work Item Property Widget",
   "scopes": [
     "vso.work",
     "vso.dashboards_manage"
