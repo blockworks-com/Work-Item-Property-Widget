@@ -31,10 +31,6 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        customCommand: 'run build'
     - script: |
         npm run build
       displayName: 'npm build'
