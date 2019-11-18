@@ -21,7 +21,6 @@ stages:
       inputs:
         InputSearchPattern: |
           **\*.ts
-          **\*.js
         FindRegex: '__INSTRUMENTATIONKEY__'
         ReplaceRegex: '$(TelemetryKey)'
         UseUTF8: false
@@ -32,8 +31,7 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-
-# Prod First
+  # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
