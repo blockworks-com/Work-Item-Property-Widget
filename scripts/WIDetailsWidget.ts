@@ -125,7 +125,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
             // desc = this.noHtml(desc);
 
             $("#wi-desc").html(desc);
-            console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM dd yyyy"));
+            console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM DD YYYY"));
         } else {
             $("#wi-desc").html("");
         }
