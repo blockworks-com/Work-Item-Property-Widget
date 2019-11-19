@@ -109,8 +109,8 @@
         ".wipropertywidget-Configuration"
       ],
       "properties": {
-        "name": "Work Item Details",
-        "description": "View details of work item on your dashboard.",
+        "name": "Work Item Property Details",
+        "description": "View property details of work item on your dashboard.",
         "uri": "static/index.html",
         "isNameConfigurable": false,
         "catalogIconUrl:": "static/images/logo.png",

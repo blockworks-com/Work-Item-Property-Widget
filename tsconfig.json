@@ -11,6 +11,6 @@
     ]
   },
   "files": [
-    "scripts/WIDetailsWidget.ts","scripts/configuration.ts","scripts/menu.ts","scripts/isettings.d.ts"
+    "scripts/WIPropertyWidget.ts","scripts/configuration.ts","scripts/menu.ts","scripts/isettings.d.ts"
   ]
 }

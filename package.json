@@ -36,7 +36,7 @@
     "telemetryclient-team-services-extension": "*",
     "vss-web-extension-sdk": "^2.117.0"
   },
-  "name": "widetails",
+  "name": "wiproperty",
   "private": true,
   "version": "0.0.1"
 }

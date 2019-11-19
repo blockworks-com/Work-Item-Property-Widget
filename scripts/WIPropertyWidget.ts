@@ -23,7 +23,7 @@ import * as tc from "telemetryclient-team-services-extension";
 import telemetryClientSettings = require("./telemetryClientSettings");
 import * as moment from "moment";
 
-export class WidgetWIDetails {
+export class WidgetWIProperty {
 
     constructor(public WidgetHelpers) {
     }
@@ -31,7 +31,7 @@ export class WidgetWIDetails {
     public client = RestClient.getClient();
     public clientwi = RestClientWI.getClient();
 
-    public LoadWIDetails(widgetSettings) {
+    public LoadWI(widgetSettings) {
         tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
 
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
@@ -48,12 +48,12 @@ export class WidgetWIDetails {
             // Main
             this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
 
-console.log("WorkItemDetailWidget:LoadWIDetails step 1");
-console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings.wiPropertyName
+console.log("WorkItemPropertyWidget:LoadWI step 1");
+console.log("WorkItemPropertyWidget:LoadWI propertyName: " + customSettings.wiPropertyName
 + "; color prop: " + customSettings.wiColorPropertyName + "; color: " + customSettings.color
 + "; title: " + customSettings.title + "; dateFormat: " + customSettings.dateFormat);
 
-                this.DisplayWIDetails(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
+                this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
                 $("#loadingwidget").hide();
                 $("#content").show();
 
@@ -89,7 +89,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
         return this.WidgetHelpers.WidgetStatusHelper.Success();
     }
 
-    private DisplayWIDetails(wi: WorkItemsContracts.WorkItem, fieldname: string, colorfield: string, colorstring: string, titlestring: string, dateFormat: string) {
+    private DisplayWI(wi: WorkItemsContracts.WorkItem, fieldname: string, colorfield: string, colorstring: string, titlestring: string, dateFormat: string) {
 
         $("#wi-header").attr("style", "height: " + 30 + "px;");
 //        $("#wi-title").attr("style", "height: " + 0 + "px;");
@@ -112,7 +112,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
         if (colorstring !== "") {
             $("#content").attr("style", "background-color: " + colorstring + ";");
             color = colorstring;
-            console.log("WorkItemDetailWidget:DisplayWIDetails color prop: " + colorfield + "; value: " + color + "; color: " + colorstring);
+            console.log("WorkItemPropertyWidget:DisplayWI color prop: " + colorfield + "; value: " + color + "; color: " + colorstring);
         }
 
 //        $("#wi-header").attr("style", "border-left-color: " + color + ";");
@@ -127,8 +127,8 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
             $("#wi-desc").html(desc);
             if (dateFormat !== "") {
                 if (moment(desc).isValid()) {
-                    console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM DD YYYY"));
-                    console.log("WorkItemDetailWidget:DisplayWIDetails check if valid date: " + moment(desc).isValid() + "; " + desc);
+                    console.log("WorkItemPropertyWidget:DisplayWI format date: " + moment(desc).format("MMM DD YYYY"));
+                    console.log("WorkItemPropertyWidget:DisplayWI check if valid date: " + moment(desc).isValid() + "; " + desc);
                     $("#wi-desc").html(moment(desc).format(dateFormat));
                 }
             }
@@ -189,7 +189,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
             default:
                 witColor = workItemType;
         }
-        console.log("WorkItemDetailWidget:getWorkItemColor result: " + witColor);
+        console.log("WorkItemPropertyWidget:getWorkItemColor result: " + witColor);
         return witColor;
     }
 
@@ -281,18 +281,18 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
 
     // Load and Reload Methods
     public load(widgetSettings) {
-        return this.LoadWIDetails(widgetSettings);
+        return this.LoadWI(widgetSettings);
     }
     public reload(widgetSettings) {
-        return this.LoadWIDetails(widgetSettings);
+        return this.LoadWI(widgetSettings);
     }
 }
 
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
     WidgetHelpers.IncludeWidgetStyles();
     VSS.register("wipropertywidget", () => {
-        let widgetDetails = new WidgetWIDetails(WidgetHelpers);
-        return widgetDetails;
+        let widgetProperty = new WidgetWIProperty(WidgetHelpers);
+        return widgetProperty;
     });
     VSS.notifyLoadSucceeded();
 });

@@ -4,7 +4,7 @@ var webpack = require("webpack");
 module.exports = {
     target: "web",
     entry: {
-        WIDetailsWidget: "./scripts/WIDetailsWidget.ts",
+        WIPropertyWidget: "./scripts/WIPropertyWidget.ts",
         configuration: "./scripts/configuration.ts",
         menu : "./scripts/menu.ts"
     },
