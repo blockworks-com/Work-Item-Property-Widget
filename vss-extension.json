@@ -102,11 +102,11 @@
       }
     },
     {
-      "id": "widetailswidget",
+      "id": "wipropertywidget",
       "type": "ms.vss-dashboards-web.widget",
       "targets": [
         "ms.vss-dashboards-web.widget-catalog",
-        ".widetailswidget-Configuration"
+        ".wipropertywidget-Configuration"
       ],
       "properties": {
         "name": "Work Item Details",
@@ -267,13 +267,13 @@
       }
     },
     {
-      "id": "widetailswidget-Configuration",
+      "id": "wipropertywidget-Configuration",
       "type": "ms.vss-dashboards-web.widget-configuration",
       "targets": [
         "ms.vss-dashboards-web.widget-configuration"
       ],
       "properties": {
-        "name": "Work Item Details Configuration",
+        "name": "Work Item Property Configuration",
         "description": "Configure Work Item Property Widget.",
         "uri": "static/configuration.html"
       }

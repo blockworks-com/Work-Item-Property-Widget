@@ -290,7 +290,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
 
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
     WidgetHelpers.IncludeWidgetStyles();
-    VSS.register("widetailswidget", () => {
+    VSS.register("wipropertywidget", () => {
         let widgetDetails = new WidgetWIDetails(WidgetHelpers);
         return widgetDetails;
     });

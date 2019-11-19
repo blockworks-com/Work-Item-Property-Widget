@@ -414,7 +414,10 @@ console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; w
             wiPropertyName: $("#wipropertyname").val(),
             wiColorPropertyName: $("#wicolorpropertyname").val(),
             color: $("#color").val(),
-            title: $("#title").val() }) };
+            title: $("#title").val(),
+            dateFormat: $("#dateFormat").val()
+            })
+        };
         return result;
     }
 
@@ -449,6 +452,12 @@ console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; w
             // $errorSingleLineInput.parent().css("visibility", "visible");
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
+        if ($("#dateFormat").val() === "") {
+            // let $errorSingleLineInput = $("#lineproperty .validation-error-text");
+            // $errorSingleLineInput.text("The Property Name is required");
+            // $errorSingleLineInput.parent().css("visibility", "visible");
+            // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
+        }
 
         console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val());
         console.log("Config:onSave wicolorpropertyname: " + this.$wicolorpropertyname.val());
@@ -461,7 +470,7 @@ console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; w
 
 VSS.require(["TFS/Dashboards/WidgetHelpers"], (WidgetHelpers) => {
     WidgetHelpers.IncludeWidgetConfigurationStyles();
-    VSS.register("widetailswidget-Configuration", () => {
+    VSS.register("wipropertywidget-Configuration", () => {
         let configuration = new Configuration(WidgetHelpers);
         return configuration;
     });

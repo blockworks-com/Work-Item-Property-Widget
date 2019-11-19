@@ -84,7 +84,7 @@ export class WiMenu {
             w.getDashboard(dashboardid).then((dashboard) => {
 
                 let Widgetobj = {
-                    "name": "Work Item details", "position": { "row": 0, "column": 0 }, "size": { "rowSpan": 1, "columnSpan": 2 }, "settings": "{\"wiId\":\"" + wiid + "\"}", "settingsVersion": { "major": 1, "minor": 0, "patch": 0 }, "dashboard": { "eTag": "" + dashboard.eTag + "" }, "contributionId": "" + VSS.getExtensionContext().publisherId + "." + VSS.getExtensionContext().extensionId + ".widetailswidget"
+                    "name": "Work Item Property details", "position": { "row": 0, "column": 0 }, "size": { "rowSpan": 1, "columnSpan": 2 }, "settings": "{\"wiId\":\"" + wiid + "\"}", "settingsVersion": { "major": 1, "minor": 0, "patch": 0 }, "dashboard": { "eTag": "" + dashboard.eTag + "" }, "contributionId": "" + VSS.getExtensionContext().publisherId + "." + VSS.getExtensionContext().extensionId + ".wipropertywidget"
                 };
                 let toSend = JSON.stringify(Widgetobj);
                 let collectionUri = VSS.getWebContext().collection.uri;

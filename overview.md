@@ -9,7 +9,7 @@ The **Work Item Property Widget** displays a card with some details of an Work i
 #### Method 1
 
 - Edit ![](/static/images/overview_edit.png) your dashboard [1]
-- Select the 'Work item details' widget [2]
+- Select the 'Work Item Property details' widget [2]
 - Click Add to add the widget to your dashboard [3]
 - Click ![](/static/images/configure.png) on the widget [4]
 
