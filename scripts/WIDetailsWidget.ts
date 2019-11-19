@@ -126,6 +126,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
 
             $("#wi-desc").html(desc);
             console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM DD YYYY"));
+            console.log("WorkItemDetailWidget:DisplayWIDetails check if valid date: " + this.isValidDate(desc));
         } else {
             $("#wi-desc").html("");
         }
@@ -153,6 +154,10 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
         }
         $("#statecircle").attr("style", "border-color:" + statecolor + ";background-color:" + backgroundcolor + "");
     }
+
+    private isValidDate(date) {
+        return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
+      }
 
     private noHtml(txt) {
         let a = txt.indexOf("<");
