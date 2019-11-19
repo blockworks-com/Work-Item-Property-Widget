@@ -32,6 +32,7 @@ export class Configuration {
     $wicolorpropertyname = $("#wicolorpropertyname");
     $color = $("#color");
     $title = $("#title");
+    $dateFormat = $("dateFormat");
 
     public client = RestClient.getClient();
     public clientwi = RestClientWI.getClient();
@@ -49,6 +50,8 @@ export class Configuration {
         let $wicolorpropertyname = $("#wicolorpropertyname");
         let $color = $("#color");
         let $title = $("#title");
+        let $dateFormat = $("dateFormat");
+
         this.widgetConfigurationContext = widgetConfigurationContext;
 
         let settings = JSON.parse(widgetSettings.customSettings.data);
@@ -81,6 +84,12 @@ export class Configuration {
         } else {
             // first load
             $title.val("");
+        }
+        if (settings && settings.dateFormat) {
+            $dateFormat.val(settings.dateFormat);
+        } else {
+            // first load
+            $dateFormat.val("");
         }
 
         let $errorSingleLineInput = $("#linewi .validation-error-text");
@@ -187,6 +196,28 @@ export class Configuration {
 
         $errorSingleLineInput = $("#dropdowncolorproperty .validation-error-text");
         _that.$wicolorpropertyname.blur(() => {
+            this.clientwi.getWorkItem($wiid.val()).then((wi) => {
+
+                $errorSingleLineInput.parent().css("visibility", "hidden");
+
+                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
+
+            }, (reject) => {
+                if (reject.status = "404") {
+                    $errorSingleLineInput.text("This Work item dosn't exist.");
+                    $errorSingleLineInput.parent().css("visibility", "visible");
+                    $(".btn-cta").attr("disabled", "disabled");
+
+                    return _that.WidgetHelpers.WidgetStatusHelper.Failure();
+
+                }
+            });
+        });
+
+        $errorSingleLineInput = $("#linedateformat .validation-error-text");
+        _that.$dateFormat.blur(() => {
+            console.log("Config:load linedateformat:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");

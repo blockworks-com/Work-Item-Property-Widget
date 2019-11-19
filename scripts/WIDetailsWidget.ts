@@ -51,9 +51,9 @@ export class WidgetWIDetails {
 console.log("WorkItemDetailWidget:LoadWIDetails step 1");
 console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings.wiPropertyName
 + "; color prop: " + customSettings.wiColorPropertyName + "; color: " + customSettings.color
-+ "; title: " + customSettings.title);
++ "; title: " + customSettings.title + "; dateFormat: " + customSettings.dateFormat);
 
-                this.DisplayWIDetails(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title);
+                this.DisplayWIDetails(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
                 $("#loadingwidget").hide();
                 $("#content").show();
 
@@ -89,7 +89,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
         return this.WidgetHelpers.WidgetStatusHelper.Success();
     }
 
-    private DisplayWIDetails(wi: WorkItemsContracts.WorkItem, fieldname: string, colorfield: string, colorstring: string, titlestring: string) {
+    private DisplayWIDetails(wi: WorkItemsContracts.WorkItem, fieldname: string, colorfield: string, colorstring: string, titlestring: string, dateFormat: string) {
 
         $("#wi-header").attr("style", "height: " + 30 + "px;");
 //        $("#wi-title").attr("style", "height: " + 0 + "px;");
@@ -125,8 +125,13 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
             // desc = this.noHtml(desc);
 
             $("#wi-desc").html(desc);
-            console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM DD YYYY"));
-            console.log("WorkItemDetailWidget:DisplayWIDetails check if valid date: " + moment(desc).isValid() + "; " + desc);
+            if (dateFormat !== "") {
+                if (moment(desc).isValid()) {
+                    console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM DD YYYY"));
+                    console.log("WorkItemDetailWidget:DisplayWIDetails check if valid date: " + moment(desc).isValid() + "; " + desc);
+                    $("#wi-desc").html(moment(desc).format(dateFormat));
+                }
+            }
         } else {
             $("#wi-desc").html("");
         }

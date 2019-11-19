@@ -16,4 +16,5 @@ interface ISettings {
     wiColorPropertyName: string;
     color: string;
     title: string;
+    dateFormat: string;
 }
