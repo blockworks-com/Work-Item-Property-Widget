@@ -126,7 +126,7 @@ console.log("WorkItemDetailWidget:LoadWIDetails propertyName: " + customSettings
 
             $("#wi-desc").html(desc);
             console.log("WorkItemDetailWidget:DisplayWIDetails format date: " + moment(desc).format("MMM DD YYYY"));
-            console.log("WorkItemDetailWidget:DisplayWIDetails check if valid date: " + this.isValidDate(desc));
+            console.log("WorkItemDetailWidget:DisplayWIDetails check if valid date: " + moment(desc).isValid() + "; " + desc);
         } else {
             $("#wi-desc").html("");
         }
