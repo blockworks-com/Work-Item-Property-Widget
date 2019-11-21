@@ -23,7 +23,7 @@ The **Work Item Property Widget** displays a card with some details of an Work i
 #### Method 2
 
 - Select the context menu ![](/static/images/context.png) on any work item list, work item dialog, or board [1]
-- Select the item 'Add to dashboard' [2]
+- Select the item 'Add Property Widget to dashboard' [2]
 - Select the desired dashboard [3]
 
 	![add to dashboard](/static/images/add-dashboard.png)

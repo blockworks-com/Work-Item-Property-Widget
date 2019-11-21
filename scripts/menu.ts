@@ -150,8 +150,8 @@ VSS.register(contributionId, {
             });
 
             return [<IContributedMenuItem>{
-                "text": "Add to dashboard",
-                title: "Add to dashboard",
+                "text": "Add Property Widget to dashboard",
+                title: "Add Property Widget to dashboard",
                 icon: "static/images/adddashboard.png",
                 childItems: childItems
             }];
