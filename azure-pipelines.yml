@@ -31,6 +31,10 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run-script build'
   # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
