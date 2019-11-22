@@ -57,7 +57,7 @@ export class Configuration {
         let $dateFormat = $("dateFormat");
         let $enableTelemetry = $("#enableTelemetry");
 
-        console.log("Config:load enabletelemetry = " + $enableTelemetry);
+        console.log("Config:load enabletelemetry = " + $enableTelemetry.is(":checked"));
         tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
 
         this.widgetConfigurationContext = widgetConfigurationContext;
