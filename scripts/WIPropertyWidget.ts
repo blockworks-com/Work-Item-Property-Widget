@@ -57,6 +57,7 @@ export class WidgetWIProperty {
                     + " dateFormat = " + customSettings.dateFormat + ";"
                     + " enableTelemetry = " + customSettings.enableTelemetry + ";";
                 console.log("WorkItemPropertyWidget:LoadWI values: " + $msg);
+                console.log("WorkItemPropertyWidget:LoadWI step 2");
 
                 if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
                 if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat"); }
