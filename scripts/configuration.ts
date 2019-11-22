@@ -36,7 +36,7 @@ export class Configuration {
     $color = $("#color");
     $title = $("#title");
     $dateFormat = $("dateFormat");
-    $enableTelemetry = $("enableTelemetry");
+    $enableTelemetry = $("#enableTelemetry");
 
     public client = RestClient.getClient();
     public clientwi = RestClientWI.getClient();
@@ -47,7 +47,6 @@ export class Configuration {
     }
 
     public load(widgetSettings, widgetConfigurationContext) {
-        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
         let _that = this;
 
         let $wiid = $("#wiid");
@@ -56,7 +55,10 @@ export class Configuration {
         let $color = $("#color");
         let $title = $("#title");
         let $dateFormat = $("dateFormat");
-        let $enableTelemetry = $("enableTelemetry");
+        let $enableTelemetry = $("#enableTelemetry");
+
+        console.log("Config:load enabletelemetry = " + $enableTelemetry);
+        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
 
         this.widgetConfigurationContext = widgetConfigurationContext;
 
@@ -434,7 +436,7 @@ console.log("Config:getSortedFieldList3 step 10");
     }
 
     public getCustomSettings() {
-console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked"));
+console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry);
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),

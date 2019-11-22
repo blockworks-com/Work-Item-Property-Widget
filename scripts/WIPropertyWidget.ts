@@ -32,9 +32,10 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
-        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
-
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
+
+        console.log("WorkItemPropertyWidget:LoadWI enabletelemetry = " + customSettings.enableTelemetry);
+        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
 
         let $title = $("h2");
         $title.text(widgetSettings.name);
