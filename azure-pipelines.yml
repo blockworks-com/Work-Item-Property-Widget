@@ -94,7 +94,7 @@ stages:
         rootFolderOrFile: '$(Build.SourcesDirectory)'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Major).$(Minor).$(rev:r)_release.zip'
+        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Build.BuildNumber)_release.zip'
         replaceExistingArchive: true
     - task: CopyFiles@2
       inputs:
