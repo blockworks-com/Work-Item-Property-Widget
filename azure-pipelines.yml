@@ -32,6 +32,7 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
+  
   # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
@@ -61,7 +62,9 @@ stages:
         UseRAW: true
     - task: RegexReplace@3
       inputs:
-        InputSearchPattern: '**/*.?s'
+        InputSearchPattern: |
+          **\menu.ts
+          **\menu.js
         FindRegex: '"Add Property Widget to dashboard"'
         ReplaceRegex: '"DEV: Add Property Widget to dashboard"'
         UseUTF8: false
@@ -76,11 +79,21 @@ stages:
         updateTasksVersion: true
         extensionVisibility: 'private'
         extensionPricing: 'free'
+
+# Continue with common tasks
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Build.BuildId)_release.zip'
+        replaceExistingArchive: true
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
         Contents: |
           *.vsix
+          *.zip
         TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
         cleanTargetFolder: true
     - task: PublishBuildArtifacts@1
