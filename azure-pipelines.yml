@@ -32,6 +32,7 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
+  
   # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
@@ -78,6 +79,15 @@ stages:
         updateTasksVersion: true
         extensionVisibility: 'private'
         extensionPricing: 'free'
+
+# Continue with common tasks
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId)_release.zip'
+        replaceExistingArchive: true
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
