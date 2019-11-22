@@ -33,7 +33,7 @@ stages:
         command: 'install'
     - task: CmdLine@2
       inputs:
-        script: 'npx tslint --version'
+        script: 'npm run build'
     - task: Npm@1
       inputs:
         command: 'custom'
