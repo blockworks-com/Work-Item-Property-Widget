@@ -21,6 +21,7 @@ stages:
       inputs:
         InputSearchPattern: |
           **\*.ts
+          **\*.js
         FindRegex: '__INSTRUMENTATIONKEY__'
         ReplaceRegex: '$(TelemetryKey)'
         UseUTF8: false
