@@ -31,6 +31,9 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
+    - task: CmdLine@2
+      inputs:
+        script: 'npx tslint --version'
     - task: Npm@1
       inputs:
         command: 'custom'
