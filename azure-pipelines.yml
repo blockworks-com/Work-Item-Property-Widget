@@ -82,13 +82,13 @@ stages:
 
 # Continue with common tasks
     - script: dir $(Build.SourcesDirectory)
-    - script: dir $(Build.SourcesDirectory)/node_modules
+    - script: dir $(Build.SourcesDirectory)\node_modules
     - task: DeleteFiles@1
       inputs:
-        SourceFolder: '$(Build.SourcesDirectory)/node_modules'
+        SourceFolder: '$(Build.SourcesDirectory)\node_modules'
         Contents: '**/*'
     - script: dir $(Build.SourcesDirectory)
-    - script: dir $(Build.SourcesDirectory)/node_modules
+    - script: dir $(Build.SourcesDirectory)\node_modules
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)'
