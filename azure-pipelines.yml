@@ -61,7 +61,9 @@ stages:
         UseRAW: true
     - task: RegexReplace@3
       inputs:
-        InputSearchPattern: '**/*.?s'
+        InputSearchPattern: |
+          **\menu.ts
+          **\menu.js
         FindRegex: '"Add Property Widget to dashboard"'
         ReplaceRegex: '"DEV: Add Property Widget to dashboard"'
         UseUTF8: false
