@@ -31,13 +31,6 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-    - task: CmdLine@2
-      inputs:
-        script: 'npm run copy-lib && npm run clean-before-build && npm run webpack'
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        customCommand: 'run-script build'
   # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
