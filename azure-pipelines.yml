@@ -81,10 +81,14 @@ stages:
         extensionPricing: 'free'
 
 # Continue with common tasks
+    - script: dir $(Build.SourcsDirectory)
+    - script: dir $(Build.SourcsDirectory)/node_modules
     - task: DeleteFiles@1
       inputs:
         SourceFolder: '$(Build.SourcsDirectory)/node_modules'
         Contents: '**/*'
+    - script: dir $(Build.SourcsDirectory)
+    - script: dir $(Build.SourcsDirectory)/node_modules
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)'
