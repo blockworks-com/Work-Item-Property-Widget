@@ -62,7 +62,7 @@ export class Configuration {
         if (_that.$enableTelemetry) {
             tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
         }
-        
+
         this.widgetConfigurationContext = widgetConfigurationContext;
 
         let settings = JSON.parse(widgetSettings.customSettings.data);
