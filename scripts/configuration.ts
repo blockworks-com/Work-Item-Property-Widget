@@ -99,7 +99,7 @@ export class Configuration {
             // first load
             $dateFormat.val("");
         }
-        if (settings && settings.enableTelemetry) {
+        if (settings && settings.enableTelemetry !== null) {
             $enableTelemetry.prop("checked", settings.enableTelemetry);
         } else {
             $enableTelemetry.prop("checked", true);
