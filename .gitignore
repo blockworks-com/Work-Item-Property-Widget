@@ -1,4 +1,5 @@
 node_modules
+dist
 obj
 .vs
 _archive
