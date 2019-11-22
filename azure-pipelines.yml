@@ -33,9 +33,6 @@ stages:
         command: 'install'
     - task: CmdLine@2
       inputs:
-        script: 'npm run build'
-    - task: CmdLine@2
-      inputs:
         script: 'npx tslint -c tslint.json "scripts/*.ts"'
     - task: Npm@1
       inputs:
