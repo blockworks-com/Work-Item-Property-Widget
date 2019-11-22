@@ -436,7 +436,7 @@ console.log("Config:getSortedFieldList3 step 10");
     }
 
     public getCustomSettings() {
-console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry);
+console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked"));
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
