@@ -93,6 +93,7 @@ stages:
         SourceFolder: '$(Build.SourcesDirectory)'
         Contents: |
           *.vsix
+          *.zip
         TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
         cleanTargetFolder: true
     - task: PublishBuildArtifacts@1
