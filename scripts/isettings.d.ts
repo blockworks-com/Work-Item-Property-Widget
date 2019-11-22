@@ -17,4 +17,5 @@ interface ISettings {
     color: string;
     title: string;
     dateFormat: string;
+    enableTelemetry: boolean;
 }

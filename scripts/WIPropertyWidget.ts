@@ -48,10 +48,22 @@ export class WidgetWIProperty {
             // Main
             this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
 
-console.log("WorkItemPropertyWidget:LoadWI step 1");
-console.log("WorkItemPropertyWidget:LoadWI propertyName: " + customSettings.wiPropertyName
-+ "; color prop: " + customSettings.wiColorPropertyName + "; color: " + customSettings.color
-+ "; title: " + customSettings.title + "; dateFormat: " + customSettings.dateFormat);
+                console.log("WorkItemPropertyWidget:LoadWI step 1");
+                let $msg = "propertyName = " + customSettings.wiPropertyName + ";"
+                    + " color prop = " + customSettings.wiColorPropertyName + ";"
+                    + " color = " + customSettings.color + ";"
+                    + " title = " + customSettings.title + ";"
+                    + " dateFormat = " + customSettings.dateFormat + ";"
+                    + " enableTelemetry = " + customSettings.enableTelemetry + ";";
+                console.log("WorkItemPropertyWidget:LoadWI values: " + $msg);
+
+                if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
+                if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat"); }
+                if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title"); }
+                if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty"); }
+                // Do not log wiPropertyName because it's required
+                // Do not log wiid because it's required
+                // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
 
                 this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
                 $("#loadingwidget").hide();

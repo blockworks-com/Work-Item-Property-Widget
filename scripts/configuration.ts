@@ -22,6 +22,9 @@ import CoreContracts = require("TFS/Core/Contracts");
 import WorkContracts = require("TFS/Work/Contracts");
 import Contracts = require("TFS/WorkItemTracking/Contracts");
 import RestClientWI = require("TFS/WorkItemTracking/RestClient");
+import { enableElement } from "VSS/Utils/UI";
+import * as tc from "telemetryclient-team-services-extension";
+import telemetryClientSettings = require("./telemetryClientSettings");
 
 export class Configuration {
     widgetConfigurationContext = null;
@@ -33,6 +36,7 @@ export class Configuration {
     $color = $("#color");
     $title = $("#title");
     $dateFormat = $("dateFormat");
+    $enableTelemetry = $("enableTelemetry");
 
     public client = RestClient.getClient();
     public clientwi = RestClientWI.getClient();
@@ -43,6 +47,7 @@ export class Configuration {
     }
 
     public load(widgetSettings, widgetConfigurationContext) {
+        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
         let _that = this;
 
         let $wiid = $("#wiid");
@@ -51,6 +56,7 @@ export class Configuration {
         let $color = $("#color");
         let $title = $("#title");
         let $dateFormat = $("dateFormat");
+        let $enableTelemetry = $("enableTelemetry");
 
         this.widgetConfigurationContext = widgetConfigurationContext;
 
@@ -90,6 +96,11 @@ export class Configuration {
         } else {
             // first load
             $dateFormat.val("");
+        }
+        if (settings && settings.enableTelemetry) {
+            $enableTelemetry.prop("checked", settings.enableTelemetry);
+        } else {
+            $enableTelemetry.prop("checked", true);
         }
 
         let $errorSingleLineInput = $("#linewi .validation-error-text");
@@ -235,6 +246,21 @@ export class Configuration {
 
                 }
             });
+        });
+
+        $errorSingleLineInput = $("#lineenableTelemetry .validation-error-text");
+        _that.$enableTelemetry.blur(() => {
+            console.log("Config:load lineenableTelemetry:blur");
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("enableTelemetry");
+
+            if (_that.$enableTelemetry) {
+                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackEvent("Telemetry Disabled");
+            } else {
+                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackEvent("Telemetry Enabled");
+            }
+
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
         console.log("Config:load step 100");
@@ -408,14 +434,15 @@ console.log("Config:getSortedFieldList3 step 10");
     }
 
     public getCustomSettings() {
-console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val());
+console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked"));
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
             wiColorPropertyName: $("#wicolorpropertyname").val(),
             color: $("#color").val(),
             title: $("#title").val(),
-            dateFormat: $("#dateFormat").val()
+            dateFormat: $("#dateFormat").val(),
+            enableTelemetry: $("#enableTelemetry").is(":checked")
             })
         };
         return result;
@@ -453,8 +480,14 @@ console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; w
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
         if ($("#dateFormat").val() === "") {
-            // let $errorSingleLineInput = $("#lineproperty .validation-error-text");
-            // $errorSingleLineInput.text("The Property Name is required");
+            // let $errorSingleLineInput = $("#linedateFormat .validation-error-text");
+            // $errorSingleLineInput.text("The Date Format is required");
+            // $errorSingleLineInput.parent().css("visibility", "visible");
+            // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
+        }
+        if ($("#enableTelemetry").val() === "") {
+            // let $errorSingleLineInput = $("#lineenableTelemetry .validation-error-text");
+            // $errorSingleLineInput.text("The Enable Telemetry is required");
             // $errorSingleLineInput.parent().css("visibility", "visible");
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
