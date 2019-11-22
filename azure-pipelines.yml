@@ -87,6 +87,7 @@ stages:
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)\node_modules'
         Contents: '**/*'
+        RemoveSourceFolder: true
     - script: dir $(Build.SourcesDirectory)
     - script: dir $(Build.SourcesDirectory)\node_modules
     - task: ArchiveFiles@2
