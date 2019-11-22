@@ -18,7 +18,7 @@ The **Work Item Property Widget** displays a card with some details of an Work i
 - Enter a Work Item Id and tab out of the text box [5]
 - Click on Save [6]
 
-	![add wi](/static/images/wi-id-configuration.png)
+	![add wi](/static/images/wi-property-configuration.png)
 
 #### Method 2
 
