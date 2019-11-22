@@ -86,14 +86,13 @@ stages:
         rootFolderOrFile: '$(Build.SourcesDirectory)'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId)_release.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/release/$(Build.DefinitionName)_$(Build.BuildId)_release.zip'
         replaceExistingArchive: true
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
         Contents: |
           *.vsix
-          *.zip
         TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
         cleanTargetFolder: true
     - task: PublishBuildArtifacts@1
