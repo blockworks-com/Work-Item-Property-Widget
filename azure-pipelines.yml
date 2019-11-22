@@ -15,7 +15,7 @@ stages:
   jobs:
   - job: run_build
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'vs2017-win2016'
     steps:
     - task: RegexReplace@3
       inputs:
@@ -32,7 +32,10 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-  
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
   # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
