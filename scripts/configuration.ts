@@ -58,8 +58,11 @@ export class Configuration {
         let $enableTelemetry = $("#enableTelemetry");
 
         console.log("Config:load enabletelemetry = " + $enableTelemetry.is(":checked"));
-        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
-
+        console.log("Config:load enabletelemetry (using settings) = " + _that.$enableTelemetry);
+        if (_that.$enableTelemetry) {
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
+        }
+        
         this.widgetConfigurationContext = widgetConfigurationContext;
 
         let settings = JSON.parse(widgetSettings.customSettings.data);
@@ -253,7 +256,6 @@ export class Configuration {
         $errorSingleLineInput = $("#lineenableTelemetry .validation-error-text");
         _that.$enableTelemetry.blur(() => {
             console.log("Config:load lineenableTelemetry:blur");
-            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("enableTelemetry");
 
             if (_that.$enableTelemetry) {
                 tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackEvent("Telemetry Disabled");

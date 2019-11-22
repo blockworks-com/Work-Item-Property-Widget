@@ -22,6 +22,7 @@ import WorkItemServices = require("TFS/WorkItemTracking/Services");
 import * as tc from "telemetryclient-team-services-extension";
 import telemetryClientSettings = require("./telemetryClientSettings");
 import * as moment from "moment";
+import { CustomTransportDataTypes } from "VSS/Ajax";
 
 export class WidgetWIProperty {
 
@@ -35,7 +36,9 @@ export class WidgetWIProperty {
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
 
         console.log("WorkItemPropertyWidget:LoadWI enabletelemetry = " + customSettings.enableTelemetry);
-        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
+        if (customSettings.enableTelemetry) {
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
+        }
 
         let $title = $("h2");
         $title.text(widgetSettings.name);
@@ -59,13 +62,15 @@ export class WidgetWIProperty {
                 console.log("WorkItemPropertyWidget:LoadWI values: " + $msg);
                 console.log("WorkItemPropertyWidget:LoadWI step 2");
 
-                if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
-                if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat"); }
-                if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title"); }
-                if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty"); }
-                // Do not log wiPropertyName because it's required
-                // Do not log wiid because it's required
-                // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
+                if (customSettings.enableTelemetry) {
+                    if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
+                    if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat"); }
+                    if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title"); }
+                    if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty"); }
+                    // Do not log wiPropertyName because it's required
+                    // Do not log wiid because it's required
+                    // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
+                }
 
                 this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
                 $("#loadingwidget").hide();
@@ -90,7 +95,9 @@ export class WidgetWIProperty {
                 } else {
                     $("#contentError").html(reject.message);
                 }
-                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
+//                if (customSettings.enableTelemetry) {
+                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
+//                }
             });
 
         } else {
