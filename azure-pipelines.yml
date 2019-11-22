@@ -21,6 +21,7 @@ stages:
       inputs:
         InputSearchPattern: |
           **\*.ts
+          **\*.js
         FindRegex: '__INSTRUMENTATIONKEY__'
         ReplaceRegex: '$(TelemetryKey)'
         UseUTF8: false
@@ -56,6 +57,13 @@ stages:
         InputSearchPattern: 'vss-extension.json'
         FindRegex: '"name": "'
         ReplaceRegex: '"name": "DEV: '
+        UseUTF8: false
+        UseRAW: true
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: '**/*.?s'
+        FindRegex: '"Add Property Widget to dashboard"'
+        ReplaceRegex: '"DEV: Add Property Widget to dashboard"'
         UseUTF8: false
         UseRAW: true
     - task: PackageAzureDevOpsExtension@2
