@@ -12,6 +12,7 @@
 
 /// <reference path="jquery.dotdotdot.d.ts" />
 "use strict";
+const DEBUG:boolean = true;
 
 import RestClient = require("TFS/Work/RestClient");
 import CoreContracts = require("TFS/Core/Contracts");
@@ -33,19 +34,19 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
-        console.log("WorkItemPropertyWidget:LoadWI step 1");
-        console.log("WorkItemPropertyWidget:LoadWI step 2");
+        this.trace("LoadWI", "step 1");
+        this.trace("LoadWI", "step 2");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
-        console.log("WorkItemPropertyWidget:LoadWI step 3");
-
-        console.log("WorkItemPropertyWidget:LoadWI enabletelemetry = " + customSettings.enableTelemetry);
-        if (customSettings.enableTelemetry) {
-            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
-        }
+        this.trace("LoadWI", "step 3");
 
         let $title = $("h2");
         $title.text(widgetSettings.name);
         if (customSettings) {
+
+            this.trace("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
+            if (customSettings.enableTelemetry) {
+                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
+            }
 
             $("#configwidget").hide();
             $("#loadingwidget").show();
@@ -55,15 +56,15 @@ export class WidgetWIProperty {
             // Main
             this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
 
-                console.log("WorkItemPropertyWidget:LoadWI step 1");
+                this.trace("LoadWI", "step 7");
                 let $msg = "propertyName = " + customSettings.wiPropertyName + ";"
                     + " color prop = " + customSettings.wiColorPropertyName + ";"
                     + " color = " + customSettings.color + ";"
                     + " title = " + customSettings.title + ";"
                     + " dateFormat = " + customSettings.dateFormat + ";"
                     + " enableTelemetry = " + customSettings.enableTelemetry + ";";
-                console.log("WorkItemPropertyWidget:LoadWI values: " + $msg);
-                console.log("WorkItemPropertyWidget:LoadWI step 2");
+                this.trace("LoadWI", "values: " + $msg);
+                this.trace("LoadWI", "step 8");
 
                 if (customSettings.enableTelemetry) {
                     if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
@@ -114,7 +115,7 @@ export class WidgetWIProperty {
     }
 
     private DisplayWI(wi: WorkItemsContracts.WorkItem, fieldname: string, colorfield: string, colorstring: string, titlestring: string, dateFormat: string) {
-        console.log("WorkItemPropertyWidget:DisplayWI step 1");
+        this.trace("DisplayWI", "step 1");
 
         $("#wi-header").attr("style", "height: " + 30 + "px;");
 //        $("#wi-title").attr("style", "height: " + 0 + "px;");
@@ -137,7 +138,7 @@ export class WidgetWIProperty {
         if (colorstring !== "") {
             $("#content").attr("style", "background-color: " + colorstring + ";");
             color = colorstring;
-            console.log("WorkItemPropertyWidget:DisplayWI color prop: " + colorfield + "; value: " + color + "; color: " + colorstring);
+            this.trace("DisplayWI", "color prop: " + colorfield + "; value: " + color + "; color: " + colorstring);
         }
 
 //        $("#wi-header").attr("style", "border-left-color: " + color + ";");
@@ -152,8 +153,8 @@ export class WidgetWIProperty {
             $("#wi-desc").html(desc);
             if (dateFormat !== "") {
                 if (moment(desc).isValid()) {
-                    console.log("WorkItemPropertyWidget:DisplayWI format date: " + moment(desc).format("MMM DD YYYY"));
-                    console.log("WorkItemPropertyWidget:DisplayWI check if valid date: " + moment(desc).isValid() + "; " + desc);
+                    this.trace("DisplayWI", "format date: " + moment(desc).format("MMM DD YYYY"));
+                    this.trace("DisplayWI", "check if valid date: " + moment(desc).isValid() + "; " + desc);
                     $("#wi-desc").html(moment(desc).format(dateFormat));
                 }
             }
@@ -185,13 +186,19 @@ export class WidgetWIProperty {
         $("#statecircle").attr("style", "border-color:" + statecolor + ";background-color:" + backgroundcolor + "");
     }
 
+    private trace(functionName: string, message: string) {
+        if (DEBUG) {
+            console.log("WIPropertyWidgets::" + functionName + ": " + message);
+        }
+    }
+
     private isValidDate(date) {
-        console.log("WorkItemPropertyWidget:isValidDate step 1");
+        this.trace("isValidDate", "step 1");
         return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
       }
 
     private noHtml(txt) {
-        console.log("WorkItemPropertyWidget:noHtml step 1");
+        this.trace("noHtml", "step 1");
         let a = txt.indexOf("<");
         let b = txt.indexOf(">");
         let len = txt.length;
@@ -208,7 +215,7 @@ export class WidgetWIProperty {
     }
 
     private getWorkItemColor(workItemType: string): string {
-        console.log("WorkItemPropertyWidget:getWorkItemColor step 1");
+        this.trace("getWorkItemColor", "step 1");
         let witColor = "";
         switch (workItemType) {
             case "AMBER":
@@ -217,12 +224,12 @@ export class WidgetWIProperty {
             default:
                 witColor = workItemType;
         }
-        console.log("WorkItemPropertyWidget:getWorkItemColor result: " + witColor);
+        this.trace("getWorkItemColor", "result: " + witColor);
         return witColor;
     }
 
     private getStateColor(state: string): string {
-        console.log("WorkItemPropertyWidget:getStateColor step 1");
+        this.trace("getStateColor", "step 1");
         let statecolor = "";
         switch (state) {
 
@@ -258,7 +265,7 @@ export class WidgetWIProperty {
     }
 
     private DeltaDate(date: Date): IDeltaDateInfo {
-        console.log("WorkItemPropertyWidget:DeltaDate step 1");
+        this.trace("DeltaDate", "step 1");
         let now = Date.now();
         let past = date.getTime();
 
@@ -301,7 +308,7 @@ export class WidgetWIProperty {
     }
 
     private getMemberAvatarUrl(memberIdentity: string): string {
-        console.log("WorkItemPropertyWidget:getMemberAvatarUrl step 1");
+        this.trace("getMemberAvatarUrl", "step 1");
 
         let i = memberIdentity.lastIndexOf("<");
         let j = memberIdentity.lastIndexOf(">");
@@ -312,25 +319,25 @@ export class WidgetWIProperty {
 
     // Load and Reload Methods
     public load(widgetSettings) {
-        console.log("WorkItemPropertyWidget:load step 1");
+        this.trace("load", "step 1");
         return this.LoadWI(widgetSettings);
     }
     public reload(widgetSettings) {
-        console.log("WorkItemPropertyWidget:reload step 1");
+        this.trace("reload", "step 1");
         return this.LoadWI(widgetSettings);
     }
 }
 
-console.log("WorkItemPropertyWidget step 56");
+this.trace("", "step 56");
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
-    console.log("WorkItemPropertyWidget step 61");
+    this.trace("", "step 61");
     WidgetHelpers.IncludeWidgetStyles();
     VSS.register("wipropertywidget", () => {
         let widgetProperty = new WidgetWIProperty(WidgetHelpers);
-        console.log("WorkItemPropertyWidget step 62");
+        this.trace("", "step 62");
         return widgetProperty;
     });
-    console.log("WorkItemPropertyWidget step 65");
+    this.trace("", "step 65");
     VSS.notifyLoadSucceeded();
 });
 
@@ -339,4 +346,3 @@ interface IDeltaDateInfo {
     days: number;
 
 }
-console.log("WorkItemPropertyWidget step 100");
