@@ -34,7 +34,9 @@ export class WidgetWIProperty {
 
     public LoadWI(widgetSettings) {
         console.log("WorkItemPropertyWidget:LoadWI step 1");
+        console.log("WorkItemPropertyWidget:LoadWI step 2");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
+        console.log("WorkItemPropertyWidget:LoadWI step 3");
 
         console.log("WorkItemPropertyWidget:LoadWI enabletelemetry = " + customSettings.enableTelemetry);
         if (customSettings.enableTelemetry) {
@@ -326,7 +328,6 @@ VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
     VSS.register("wipropertywidget", () => {
         let widgetProperty = new WidgetWIProperty(WidgetHelpers);
         console.log("WorkItemPropertyWidget step 62");
-        console.log("WorkItemPropertyWidget step 63 widgetProperty = " + widgetProperty);
         return widgetProperty;
     });
     console.log("WorkItemPropertyWidget step 65");
