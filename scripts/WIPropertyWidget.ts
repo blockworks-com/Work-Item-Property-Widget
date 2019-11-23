@@ -12,7 +12,7 @@
 
 /// <reference path="jquery.dotdotdot.d.ts" />
 "use strict";
-const DEBUG:boolean = true;
+const DEBUG: boolean = true;
 
 import RestClient = require("TFS/Work/RestClient");
 import CoreContracts = require("TFS/Core/Contracts");
