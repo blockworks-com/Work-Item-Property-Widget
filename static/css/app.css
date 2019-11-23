@@ -35,8 +35,8 @@
 
 .wi-desc {
     padding: 2px 12px;
-    height: calc(100vh - 110px);
-    min-height: calc(100vh - 110px);
+    height: calc(100% - 110px);
+    min-height: calc(100% - 110px);
     font-size: 11px;
     overflow: hidden;
     text-align: justify;
