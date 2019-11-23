@@ -2,7 +2,7 @@
 
 The **Work Item Property Widget** displays a card showing the property selected on your dashboards.
 
-![detailed cards](src/static/images/detailed-cards.png)
+![detailed cards](static/images/detailed-cards.png)
 
 ## Quick steps to get started
 
@@ -13,7 +13,7 @@ The **Work Item Property Widget** displays a card showing the property selected 
 - Click Add to add the widget to your dashboard
 - Click Configure on the widget
 
-![add widget](src/static/images/add-widget-steps.png)
+![add widget](static/images/add-widget-steps.png)
 
 - Enter a Work Item Id and tab out of the text box.
 - Enter a Title to display (at the top of the widget) and tab out of the text box.
@@ -23,7 +23,7 @@ The **Work Item Property Widget** displays a card showing the property selected 
 - (Optional) Enter a Date Format to format the widget context if it's a date and tab out of the text box. For example, use MMM DD YYYY to format the Target Go Live property.
 - Click on Save
 
-![add wi](src/static/images/wi-id-configuration.png)
+![add wi](static/images/wi-id-configuration.png)
 
 ### Method 2
 
@@ -31,7 +31,7 @@ The **Work Item Property Widget** displays a card showing the property selected 
 - Select the item 'Add Property Widget to dashboard'
 - Select the desired dashboard
 
-![add to dashboard](src/static/images/add-dashboard.png)
+![add to dashboard](static/images/add-dashboard.png)
 
 ### Notes
 
