@@ -35,16 +35,14 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
-        console.log("WIPropertyWidget::LoadWI .... written use conosole.log().");
-        logger("LoadWI", "step 1");
-        logger("LoadWI", "step 2");
+        logger("LoadWI", "step 10");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
-        logger("LoadWI", "step 3");
-
         let $title = $("h2");
         $title.text(widgetSettings.name);
         if (customSettings) {
-            DEBUG = customSettings.enableDebug;
+            if (customSettings.enableDebug !== null) {
+                DEBUG = customSettings.enableDebug;
+            }
 
             logger("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
             if (customSettings.enableTelemetry) {
@@ -58,16 +56,15 @@ export class WidgetWIProperty {
 
             // Main
             this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
-
-                logger("LoadWI", "step 7");
                 let $msg = "propertyName = " + customSettings.wiPropertyName + ";"
                     + " color prop = " + customSettings.wiColorPropertyName + ";"
                     + " color = " + customSettings.color + ";"
                     + " title = " + customSettings.title + ";"
                     + " dateFormat = " + customSettings.dateFormat + ";"
-                    + " enableTelemetry = " + customSettings.enableTelemetry + ";";
+                    + " enableTelemetry = " + customSettings.enableTelemetry + ";"
+                    + " enableDebug = " + customSettings.enableDebug + ";"
+                    ;
                 logger("LoadWI", "values: " + $msg);
-                logger("LoadWI", "step 8");
 
                 if (customSettings.enableTelemetry) {
                     if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
@@ -77,6 +74,7 @@ export class WidgetWIProperty {
                     // Do not log wiPropertyName because it's required
                     // Do not log wiid because it's required
                     // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
+                    // Do not log enableDebug because usage doesn't matter
                 }
 
                 this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
@@ -102,9 +100,8 @@ export class WidgetWIProperty {
                 } else {
                     $("#contentError").html(reject.message);
                 }
-//                if (customSettings.enableTelemetry) {
-                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
-//                }
+                logger("LoadWI", "Exception: " + reject.response);
+                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
             });
 
         } else {
@@ -325,21 +322,17 @@ export class WidgetWIProperty {
     }
 }
 
-logger("", "step 56");
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
     logger("", "step 61");
     WidgetHelpers.IncludeWidgetStyles();
     VSS.register("wipropertywidget", () => {
         let widgetProperty = new WidgetWIProperty(WidgetHelpers);
-        logger("", "step 62");
         return widgetProperty;
     });
-    logger("", "step 65");
     VSS.notifyLoadSucceeded();
 });
 
 interface IDeltaDateInfo {
     text: string;
     days: number;
-
 }

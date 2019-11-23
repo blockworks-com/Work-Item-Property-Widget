@@ -13,6 +13,7 @@
 /// <reference path='isettings.d.ts' />
 "use strict";
 let DEBUG: boolean = true;
+let logger = function(a: any, b: any) { if (DEBUG) { console.log(a, b || ""); } };
 
 import Q = require("q");
 import Controls = require("VSS/Controls");
@@ -39,6 +40,7 @@ export class Configuration {
     $title = $("#title");
     $dateFormat = $("dateFormat");
     $enableTelemetry = $("#enableTelemetry");
+    $enableDebug = $("#enableDebug");
 
     public client = RestClient.getClient();
     public clientwi = RestClientWI.getClient();
@@ -58,10 +60,9 @@ export class Configuration {
         let $title = $("#title");
         let $dateFormat = $("dateFormat");
         let $enableTelemetry = $("#enableTelemetry");
-//        let $enableDebug = $("#enableDebug");
+        let $enableDebug = $("#enableDebug");
 
-        this.trace("load", "enabletelemetry = " + $enableTelemetry.is(":checked"));
-        this.trace("load", "enabletelemetry (using settings) = " + _that.$enableTelemetry);
+        logger("load", "enabletelemetry (using settings) = " + _that.$enableTelemetry);
         if (_that.$enableTelemetry) {
             tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
         }
@@ -112,20 +113,17 @@ export class Configuration {
         }
         if (settings && settings.enableDebug !== null) {
             DEBUG = settings.enableDebug;
-//            $enableDebug.prop("checked", settings.enableDebug);
+            $enableDebug.prop("checked", settings.enableDebug);
         } else {
-//            $enableDebug.prop("checked", true);
+            $enableDebug.prop("checked", true);
         }
 
         let $errorSingleLineInput = $("#linewi .validation-error-text");
         _that.$wiid.blur(() => {
+            logger("load", "linewi:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-
-                this.trace("load", "step 10");
-
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
-                this.trace("load", "step 20");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
                     for (const field of fieldList) {
                         const opt = document.createElement("option");
@@ -142,7 +140,6 @@ export class Configuration {
                     }
                 });
 
-                this.trace("load", "step 25");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
                     for (const field of fieldList) {
                         const opt = document.createElement("option");
@@ -159,7 +156,6 @@ export class Configuration {
                     }
                 });
 
-                this.trace("load", "step 30");
                 _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
                     _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
 
@@ -177,7 +173,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#linetitle .validation-error-text");
         _that.$title.blur(() => {
-            this.trace("load", "linetitle:blur");
+            logger("load", "linetitle:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -199,7 +195,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#dropdownproperty .validation-error-text");
         _that.$wipropertyname.blur(() => {
-            this.trace("load", "dropdownproperty:blur");
+            logger("load", "dropdownproperty:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -221,6 +217,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#dropdowncolorproperty .validation-error-text");
         _that.$wicolorpropertyname.blur(() => {
+            logger("load", "dropdowncolorproperty:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -242,7 +239,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#linedateformat .validation-error-text");
         _that.$dateFormat.blur(() => {
-            this.trace("load", "linedateformat:blur");
+            logger("load", "linedateformat:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -264,7 +261,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#lineenableTelemetry .validation-error-text");
         _that.$enableTelemetry.blur(() => {
-            this.trace("load", "lineenableTelemetry:blur");
+            logger("load", "lineenableTelemetry:blur");
 
             if (_that.$enableTelemetry) {
                 tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackEvent("Telemetry Disabled");
@@ -276,9 +273,15 @@ export class Configuration {
                 _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
-        this.trace("load", "step 100");
+        $errorSingleLineInput = $("#lineenableDebug .validation-error-text");
+        _that.$enableDebug.blur(() => {
+            logger("load", "lineenableDebug:blur");
+
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
+        });
+
         this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-            this.trace("load", "step 110");
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
                 for (const field of fieldList) {
@@ -317,7 +320,7 @@ export class Configuration {
     }
 
     private isValidWI(): IPromise<boolean> {
-        this.trace("isValidWI", "step 10");
+        logger("isValidWI", "step 10");
         let deferred = $.Deferred<boolean>();
 
         if ($("#wiid").val() !== "") {
@@ -335,14 +338,8 @@ export class Configuration {
         return deferred.promise();
     }
 
-    public trace(functionName: string, message: string) {
-        if (DEBUG) {
-            console.log("configuration::" + functionName + ": " + message);
-        }
-    }
-
     private getSortedFieldsList(): IPromise<any> {
-        this.trace("getSortedFieldList", "step 10");
+        logger("getSortedFieldList", "step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields().then((fields: Contracts.WorkItemField[]) => {
@@ -365,7 +362,7 @@ export class Configuration {
     }
 
     private getSortedFieldsList2(wi): IPromise<any> {
-        this.trace("getSortedFieldList2", "step 10");
+        logger("getSortedFieldList2", "step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields(wi.project).then((fields: Contracts.WorkItemField[]) => {
@@ -388,7 +385,7 @@ export class Configuration {
     }
 
     private getSortedFieldsList3(wi): IPromise<any> {
-        this.trace("getSortedFieldList3", "step 10");
+        logger("getSortedFieldList3", "step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields(wi.project).then((fields: Contracts.WorkItemField[]) => {
@@ -422,11 +419,10 @@ export class Configuration {
 
     // getComboOptions("colorpropertyname", fieldList, $wicolorpropertyname.val())
     private getComboOptions(id, fieldsList, initialField): IComboOptions {
-        this.trace("getComboOptions", "step 10");
-        this.trace("getComboOptions", "step 11");
-        this.trace("getComboOptions", "initialField: " + initialField);
+        logger("getComboOptions", "step 10");
+        logger("getComboOptions", "initialField: " + initialField);
         let that = this;
-        this.trace("getComboOptions", "getFieldName(initialField): " + that.getFieldName(initialField));
+        logger("getComboOptions", "getFieldName(initialField): " + that.getFieldName(initialField));
         return {
             id: id,
             mode: "drop",
@@ -443,7 +439,7 @@ export class Configuration {
 
                 switch (this._id) {
                     case "colorpropertyname":
-                        this.trace("getComboOptions", "fieldName: " + fieldName + "; refname: " + fieldReferenceName);
+                        logger("getComboOptions", "fieldName: " + fieldName + "; refname: " + fieldReferenceName);
                         that.$wicolorpropertyname.val(fieldName);
                         break;
                 }
@@ -453,7 +449,7 @@ export class Configuration {
     }
 
     public getCustomSettings() {
-        this.trace("getCustomSettings", "wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked"));
+        logger("getCustomSettings", "wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked") + "; enableDebug: " + this.$enableDebug.is(":checked"));
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
@@ -462,7 +458,7 @@ export class Configuration {
             title: $("#title").val(),
             dateFormat: $("#dateFormat").val(),
             enableTelemetry: $("#enableTelemetry").is(":checked"),
-            enableDebug: true
+            enableDebug: $("#enableDebug").is(":checked")
             })
         };
         return result;
@@ -511,10 +507,16 @@ export class Configuration {
             // $errorSingleLineInput.parent().css("visibility", "visible");
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
+        if ($("#enableDebug").val() === "") {
+            // let $errorSingleLineInput = $("#lineenableDebug .validation-error-text");
+            // $errorSingleLineInput.text("The Enable Debug is required");
+            // $errorSingleLineInput.parent().css("visibility", "visible");
+            // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
+        }
 
-        this.trace("onSave", "wipropertyname: " + this.$wipropertyname.val());
-        this.trace("onSave", "wicolorpropertyname: " + this.$wicolorpropertyname.val());
-        this.trace("onSave", "wipropertyname: " + $("#wipropertyname").val());
+        logger("onSave", "wipropertyname: " + this.$wipropertyname.val());
+        logger("onSave", "wicolorpropertyname: " + this.$wicolorpropertyname.val());
+        logger("onSave", "wipropertyname: " + $("#wipropertyname").val());
 
         let customSettings = this.getCustomSettings();
         return this.WidgetHelpers.WidgetConfigurationSave.Valid(customSettings);

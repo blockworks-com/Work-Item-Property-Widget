@@ -10,6 +10,7 @@
 // ---------------------------------------------------------------------
 "use strict";
 let DEBUG: boolean = true;
+let logger = function(a: any, b: any) { if (DEBUG) { console.log(a, b || ""); } };
 
 import Services = require("VSS/Authentication/Services");
 import * as tc from "telemetryclient-team-services-extension";
@@ -39,18 +40,13 @@ export class WiMenu {
                     deferred.resolve(c.dashboardEntries);
                 },
                 error: e => {
+                    logger("getDashboards", "Exception: " + e.response);
                     tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(e.response);
                 }
             });
 
         });
         return deferred.promise();
-    }
-
-    public trace(functionName: string, message: string) {
-        if (DEBUG) {
-            console.log("menu::" + functionName + ": " + message);
-        }
     }
 
     public getDashboard(dashboardId): IPromise<any> {
@@ -72,6 +68,7 @@ export class WiMenu {
                     deferred.resolve(c);
                 },
                 error: e => {
+                    logger("getDashboard", "Exception: " + e.response);
                     tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(e.response);
                 }
             });
@@ -104,10 +101,11 @@ export class WiMenu {
                     contentType: "application/json; charset=utf-8",
                     data: toSend,
                     success: c => {
-                        this.trace("addWidgetToDashboard", "WI " + wiid + " is added to Dashboard " + dashboard.name);
+                        logger("addWidgetToDashboard", "WI " + wiid + " is added to Dashboard " + dashboard.name);
                         deferred.resolve(c);
                     },
                     error: e => {
+                        logger("addWidgetToDashboard", "Exception: " + e.response);
                         tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(e.response);
                     }
                 });
