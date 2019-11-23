@@ -28,7 +28,7 @@ The **Work Item Property Widget** displays a card showing the property selected 
 - (Optional) Enter a Date Format to format the widget context if it's a date and tab out of the text box. For example, use MMM DD YYYY to format the Target Go Live property.
 - Click on Save
 
-![add wi](static/images/wi-id-configuration.png)
+![add wi](static/images/wi-property-configuration.png)
 
 ### Method 2
 
