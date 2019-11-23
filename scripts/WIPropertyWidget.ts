@@ -33,6 +33,7 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
+        console.log("WorkItemPropertyWidget:LoadWI step 1");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
 
         console.log("WorkItemPropertyWidget:LoadWI enabletelemetry = " + customSettings.enableTelemetry);
@@ -111,6 +112,7 @@ export class WidgetWIProperty {
     }
 
     private DisplayWI(wi: WorkItemsContracts.WorkItem, fieldname: string, colorfield: string, colorstring: string, titlestring: string, dateFormat: string) {
+        console.log("WorkItemPropertyWidget:DisplayWI step 1");
 
         $("#wi-header").attr("style", "height: " + 30 + "px;");
 //        $("#wi-title").attr("style", "height: " + 0 + "px;");
@@ -182,10 +184,12 @@ export class WidgetWIProperty {
     }
 
     private isValidDate(date) {
+        console.log("WorkItemPropertyWidget:isValidDate step 1");
         return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
       }
 
     private noHtml(txt) {
+        console.log("WorkItemPropertyWidget:noHtml step 1");
         let a = txt.indexOf("<");
         let b = txt.indexOf(">");
         let len = txt.length;
@@ -202,6 +206,7 @@ export class WidgetWIProperty {
     }
 
     private getWorkItemColor(workItemType: string): string {
+        console.log("WorkItemPropertyWidget:getWorkItemColor step 1");
         let witColor = "";
         switch (workItemType) {
             case "AMBER":
@@ -215,6 +220,7 @@ export class WidgetWIProperty {
     }
 
     private getStateColor(state: string): string {
+        console.log("WorkItemPropertyWidget:getStateColor step 1");
         let statecolor = "";
         switch (state) {
 
@@ -250,6 +256,7 @@ export class WidgetWIProperty {
     }
 
     private DeltaDate(date: Date): IDeltaDateInfo {
+        console.log("WorkItemPropertyWidget:DeltaDate step 1");
         let now = Date.now();
         let past = date.getTime();
 
@@ -292,6 +299,7 @@ export class WidgetWIProperty {
     }
 
     private getMemberAvatarUrl(memberIdentity: string): string {
+        console.log("WorkItemPropertyWidget:getMemberAvatarUrl step 1");
 
         let i = memberIdentity.lastIndexOf("<");
         let j = memberIdentity.lastIndexOf(">");
@@ -302,21 +310,26 @@ export class WidgetWIProperty {
 
     // Load and Reload Methods
     public load(widgetSettings) {
+        console.log("WorkItemPropertyWidget:load step 1");
         return this.LoadWI(widgetSettings);
     }
     public reload(widgetSettings) {
+        console.log("WorkItemPropertyWidget:reload step 1");
         return this.LoadWI(widgetSettings);
     }
 }
 
 console.log("WorkItemPropertyWidget step 56");
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
-    console.log("WorkItemPropertyWidget step 66");
+    console.log("WorkItemPropertyWidget step 61");
     WidgetHelpers.IncludeWidgetStyles();
     VSS.register("wipropertywidget", () => {
         let widgetProperty = new WidgetWIProperty(WidgetHelpers);
+        console.log("WorkItemPropertyWidget step 62");
+        console.log("WorkItemPropertyWidget step 63 widgetProperty = " + widgetProperty);
         return widgetProperty;
     });
+    console.log("WorkItemPropertyWidget step 65");
     VSS.notifyLoadSucceeded();
 });
 
@@ -325,3 +338,4 @@ interface IDeltaDateInfo {
     days: number;
 
 }
+console.log("WorkItemPropertyWidget step 100");
