@@ -94,7 +94,7 @@ stages:
     - task: RegexReplace@3
       inputs:
         InputSearchPattern: 'vss-extension.json'
-        FindRegex: '"name": "QA'
+        FindRegex: '"name": "QA:'
         ReplaceRegex: '"name": "DEV: '
         UseUTF8: false
         UseRAW: true
