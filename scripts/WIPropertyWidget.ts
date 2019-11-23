@@ -34,6 +34,7 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
+        console.log("WIPropertyWidget::LoadWI .... written use conosole.log().");
         this.trace("LoadWI", "step 1");
         this.trace("LoadWI", "step 2");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
@@ -187,7 +188,7 @@ export class WidgetWIProperty {
         $("#statecircle").attr("style", "border-color:" + statecolor + ";background-color:" + backgroundcolor + "");
     }
 
-    public trace(functionName: string, message: string) {
+    trace(functionName: string, message: string): void {
         if (DEBUG) {
             console.log("WIPropertyWidgets::" + functionName + ": " + message);
         }
