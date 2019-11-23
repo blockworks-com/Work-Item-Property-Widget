@@ -12,7 +12,7 @@
 
 /// <reference path="jquery.dotdotdot.d.ts" />
 "use strict";
-const DEBUG: boolean = true;
+let DEBUG: boolean = true;
 
 import RestClient = require("TFS/Work/RestClient");
 import CoreContracts = require("TFS/Core/Contracts");
@@ -42,6 +42,7 @@ export class WidgetWIProperty {
         let $title = $("h2");
         $title.text(widgetSettings.name);
         if (customSettings) {
+            DEBUG = customSettings.enableDebug;
 
             this.trace("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
             if (customSettings.enableTelemetry) {
@@ -186,7 +187,7 @@ export class WidgetWIProperty {
         $("#statecircle").attr("style", "border-color:" + statecolor + ";background-color:" + backgroundcolor + "");
     }
 
-    private trace(functionName: string, message: string) {
+    public trace(functionName: string, message: string) {
         if (DEBUG) {
             console.log("WIPropertyWidgets::" + functionName + ": " + message);
         }

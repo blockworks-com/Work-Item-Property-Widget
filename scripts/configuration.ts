@@ -12,6 +12,8 @@
 
 /// <reference path='isettings.d.ts' />
 "use strict";
+let DEBUG: boolean = true;
+
 import Q = require("q");
 import Controls = require("VSS/Controls");
 import {Combo, IComboOptions} from "VSS/Controls/Combos";
@@ -56,9 +58,10 @@ export class Configuration {
         let $title = $("#title");
         let $dateFormat = $("dateFormat");
         let $enableTelemetry = $("#enableTelemetry");
+//        let $enableDebug = $("#enableDebug");
 
-        console.log("Config:load enabletelemetry = " + $enableTelemetry.is(":checked"));
-        console.log("Config:load enabletelemetry (using settings) = " + _that.$enableTelemetry);
+        this.trace("load", "enabletelemetry = " + $enableTelemetry.is(":checked"));
+        this.trace("load", "enabletelemetry (using settings) = " + _that.$enableTelemetry);
         if (_that.$enableTelemetry) {
             tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
         }
@@ -107,16 +110,22 @@ export class Configuration {
         } else {
             $enableTelemetry.prop("checked", true);
         }
+        if (settings && settings.enableDebug !== null) {
+            DEBUG = settings.enableDebug;
+//            $enableDebug.prop("checked", settings.enableDebug);
+        } else {
+//            $enableDebug.prop("checked", true);
+        }
 
         let $errorSingleLineInput = $("#linewi .validation-error-text");
         _that.$wiid.blur(() => {
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
-        console.log("Config:load step 10");
+                this.trace("load", "step 10");
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
-                console.log("Config:load step 20");
+                this.trace("load", "step 20");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
                     for (const field of fieldList) {
                         const opt = document.createElement("option");
@@ -133,7 +142,7 @@ export class Configuration {
                     }
                 });
 
-                console.log("Config:load step 25");
+                this.trace("load", "step 25");
                 this.getSortedFieldsList2(wi).then((fieldList) => {
                     for (const field of fieldList) {
                         const opt = document.createElement("option");
@@ -150,7 +159,7 @@ export class Configuration {
                     }
                 });
 
-                console.log("Config:load step 30");
+                this.trace("load", "step 30");
                 _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
                     _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
 
@@ -168,7 +177,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#linetitle .validation-error-text");
         _that.$title.blur(() => {
-            console.log("Config:load linetitle:blur");
+            this.trace("load", "linetitle:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -190,7 +199,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#dropdownproperty .validation-error-text");
         _that.$wipropertyname.blur(() => {
-            console.log("Config:load dropdownproperty:blur");
+            this.trace("load", "dropdownproperty:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -233,7 +242,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#linedateformat .validation-error-text");
         _that.$dateFormat.blur(() => {
-            console.log("Config:load linedateformat:blur");
+            this.trace("load", "linedateformat:blur");
             this.clientwi.getWorkItem($wiid.val()).then((wi) => {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
@@ -255,7 +264,7 @@ export class Configuration {
 
         $errorSingleLineInput = $("#lineenableTelemetry .validation-error-text");
         _that.$enableTelemetry.blur(() => {
-            console.log("Config:load lineenableTelemetry:blur");
+            this.trace("load", "lineenableTelemetry:blur");
 
             if (_that.$enableTelemetry) {
                 tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackEvent("Telemetry Disabled");
@@ -267,9 +276,9 @@ export class Configuration {
                 _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
-        console.log("Config:load step 100");
+        this.trace("load", "step 100");
         this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-            console.log("Config:load step 110");
+            this.trace("load", "step 110");
 
             this.getSortedFieldsList2(wi).then((fieldList) => {
                 for (const field of fieldList) {
@@ -308,7 +317,7 @@ export class Configuration {
     }
 
     private isValidWI(): IPromise<boolean> {
-console.log("Config:isValidWI step 10");
+        this.trace("isValidWI", "step 10");
         let deferred = $.Deferred<boolean>();
 
         if ($("#wiid").val() !== "") {
@@ -326,8 +335,14 @@ console.log("Config:isValidWI step 10");
         return deferred.promise();
     }
 
+    public trace(functionName: string, message: string) {
+        if (DEBUG) {
+            console.log("configuration::" + functionName + ": " + message);
+        }
+    }
+
     private getSortedFieldsList(): IPromise<any> {
-        console.log("Config:getSortedFieldList step 10");
+        this.trace("getSortedFieldList", "step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields().then((fields: Contracts.WorkItemField[]) => {
@@ -350,7 +365,7 @@ console.log("Config:isValidWI step 10");
     }
 
     private getSortedFieldsList2(wi): IPromise<any> {
-console.log("Config:getSortedFieldList2 step 10");
+        this.trace("getSortedFieldList2", "step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields(wi.project).then((fields: Contracts.WorkItemField[]) => {
@@ -373,7 +388,7 @@ console.log("Config:getSortedFieldList2 step 10");
     }
 
     private getSortedFieldsList3(wi): IPromise<any> {
-console.log("Config:getSortedFieldList3 step 10");
+        this.trace("getSortedFieldList3", "step 10");
         let deferred = Q.defer();
         let client = RestClientWI.getClient();
         client.getFields(wi.project).then((fields: Contracts.WorkItemField[]) => {
@@ -407,11 +422,11 @@ console.log("Config:getSortedFieldList3 step 10");
 
     // getComboOptions("colorpropertyname", fieldList, $wicolorpropertyname.val())
     private getComboOptions(id, fieldsList, initialField): IComboOptions {
-        console.log("Config:getComboOptions step 10");
-        console.log("Config:getComboOptions step 11");
-        console.log("Config:getComboOptions initialField: " + initialField);
+        this.trace("getComboOptions", "step 10");
+        this.trace("getComboOptions", "step 11");
+        this.trace("getComboOptions", "initialField: " + initialField);
         let that = this;
-        console.log("Config:getComboOptions getFieldName(initialField): " + that.getFieldName(initialField));
+        this.trace("getComboOptions", "getFieldName(initialField): " + that.getFieldName(initialField));
         return {
             id: id,
             mode: "drop",
@@ -428,7 +443,7 @@ console.log("Config:getSortedFieldList3 step 10");
 
                 switch (this._id) {
                     case "colorpropertyname":
-                        console.log("Config:getComboOptions fieldName: " + fieldName + "; refname: " + fieldReferenceName);
+                        this.trace("getComboOptions", "fieldName: " + fieldName + "; refname: " + fieldReferenceName);
                         that.$wicolorpropertyname.val(fieldName);
                         break;
                 }
@@ -438,7 +453,7 @@ console.log("Config:getSortedFieldList3 step 10");
     }
 
     public getCustomSettings() {
-console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked"));
+        this.trace("getCustomSettings", "wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked"));
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
@@ -446,7 +461,8 @@ console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; w
             color: $("#color").val(),
             title: $("#title").val(),
             dateFormat: $("#dateFormat").val(),
-            enableTelemetry: $("#enableTelemetry").is(":checked")
+            enableTelemetry: $("#enableTelemetry").is(":checked"),
+            enableDebug: true
             })
         };
         return result;
@@ -496,9 +512,9 @@ console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val() + "; w
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
 
-        console.log("Config:onSave wipropertyname: " + this.$wipropertyname.val());
-        console.log("Config:onSave wicolorpropertyname: " + this.$wicolorpropertyname.val());
-        console.log("Config:onSave wipropertyname: " + $("#wipropertyname").val());
+        this.trace("onSave", "wipropertyname: " + this.$wipropertyname.val());
+        this.trace("onSave", "wicolorpropertyname: " + this.$wicolorpropertyname.val());
+        this.trace("onSave", "wipropertyname: " + $("#wipropertyname").val());
 
         let customSettings = this.getCustomSettings();
         return this.WidgetHelpers.WidgetConfigurationSave.Valid(customSettings);

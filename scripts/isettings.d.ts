@@ -18,4 +18,5 @@ interface ISettings {
     title: string;
     dateFormat: string;
     enableTelemetry: boolean;
+    enableDebug: boolean;
 }

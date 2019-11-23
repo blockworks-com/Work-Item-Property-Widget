@@ -9,6 +9,8 @@
 // <summary>TypeScript file for Work Item Property Widget extension</summary>
 // ---------------------------------------------------------------------
 "use strict";
+let DEBUG: boolean = true;
+
 import Services = require("VSS/Authentication/Services");
 import * as tc from "telemetryclient-team-services-extension";
 import telemetryClientSettings = require("./telemetryClientSettings");
@@ -43,6 +45,12 @@ export class WiMenu {
 
         });
         return deferred.promise();
+    }
+
+    public trace(functionName: string, message: string) {
+        if (DEBUG) {
+            console.log("menu::" + functionName + ": " + message);
+        }
     }
 
     public getDashboard(dashboardId): IPromise<any> {
@@ -96,7 +104,7 @@ export class WiMenu {
                     contentType: "application/json; charset=utf-8",
                     data: toSend,
                     success: c => {
-                        console.log("menu:addWidgetToDashboard: WI " + wiid + " is added to Dashboard " + dashboard.name);
+                        this.trace("addWidgetToDashboard", "WI " + wiid + " is added to Dashboard " + dashboard.name);
                         deferred.resolve(c);
                     },
                     error: e => {
