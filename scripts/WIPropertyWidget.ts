@@ -309,7 +309,9 @@ export class WidgetWIProperty {
     }
 }
 
+console.log("WorkItemPropertyWidget step 56");
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
+    console.log("WorkItemPropertyWidget step 66");
     WidgetHelpers.IncludeWidgetStyles();
     VSS.register("wipropertywidget", () => {
         let widgetProperty = new WidgetWIProperty(WidgetHelpers);
