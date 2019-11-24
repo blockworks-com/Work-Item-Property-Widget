@@ -47,8 +47,8 @@ export class WidgetWIProperty {
             logger("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
             if (customSettings.enableTelemetry) {
                 logger("LoadWI", "before call to telemetry");
-                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
-                logger("LoadWI", "after call to telemetry");
+//                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
+//                logger("LoadWI", "after call to telemetry");
             }
 
             $("#configwidget").hide();
