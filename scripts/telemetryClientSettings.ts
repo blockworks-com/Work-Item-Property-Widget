@@ -16,6 +16,6 @@ export const settings: tc.TelemetryClientSettings = {
     key: "e4104431-5dae-465d-b7dc-cbe5bb367d95",
     extensioncontext: "WorkItemPropertyWidget",
     disableTelemetry: "false",
-    disableAjaxTracking: "false",
+    disableAjaxTracking: "true",
     enableDebug: "true"
 };
