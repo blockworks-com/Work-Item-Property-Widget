@@ -48,19 +48,19 @@ stages:
         extensionVisibility: 'private'
         extensionPricing: 'free'
 
-# DEV Second
+# QA Second
     - task: RegexReplace@3
       inputs:
         InputSearchPattern: 'vss-extension.json'
         FindRegex: '"description": "'
-        ReplaceRegex: '"description": "DEV: '
+        ReplaceRegex: '"description": "QA: '
         UseUTF8: false
         UseRAW: true
     - task: RegexReplace@3
       inputs:
         InputSearchPattern: 'vss-extension.json'
         FindRegex: '"name": "'
-        ReplaceRegex: '"name": "DEV: '
+        ReplaceRegex: '"name": "QA: '
         UseUTF8: false
         UseRAW: true
     - task: RegexReplace@3
@@ -69,6 +69,41 @@ stages:
           **\menu.ts
           **\menu.js
         FindRegex: '"Add Property Widget to dashboard"'
+        ReplaceRegex: '"QA: Add Property Widget to dashboard"'
+        UseUTF8: false
+        UseRAW: true
+    - task: PackageAzureDevOpsExtension@2
+      inputs:
+        rootFolder: '$(Build.SourcesDirectory)'
+        publisherId: '$(PublisherId)'
+        extensionId: '$(ExtensionId)'
+        extensionVersion: '$(Build.BuildNumber)'
+        extensionTag: '-QA'
+        updateTasksVersion: true
+        extensionVisibility: 'private'
+        extensionPricing: 'free'
+
+# DEV Third
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: 'vss-extension.json'
+        FindRegex: '"description": "QA:'
+        ReplaceRegex: '"description": "DEV: '
+        UseUTF8: false
+        UseRAW: true
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: 'vss-extension.json'
+        FindRegex: '"name": "QA:'
+        ReplaceRegex: '"name": "DEV: '
+        UseUTF8: false
+        UseRAW: true
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: |
+          **\menu.ts
+          **\menu.js
+        FindRegex: '"QA: Add Property Widget to dashboard"'
         ReplaceRegex: '"DEV: Add Property Widget to dashboard"'
         UseUTF8: false
         UseRAW: true
@@ -84,18 +119,19 @@ stages:
         extensionPricing: 'free'
 
 # Continue with common tasks
+
 #    - task: DeleteFiles@1
 #      inputs:
 #        SourceFolder: '$(Build.SourcesDirectory)\node_modules'
 #        Contents: '**/*'
 #        RemoveSourceFolder: true
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Build.BuildNumber)_release.zip'
-        replaceExistingArchive: true
+#    - task: ArchiveFiles@2
+#      inputs:
+#        rootFolderOrFile: '$(Build.SourcesDirectory)'
+#        includeRootFolder: false
+#        archiveType: 'zip'
+#        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Build.BuildNumber)_release.zip'
+#        replaceExistingArchive: true
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
@@ -110,12 +146,12 @@ stages:
         artifactName: release
 
 # Publish DEV only in CI
-#    - task: PublishAzureDevOpsExtension@2
-#      inputs:
-#        connectTo: 'VsTeam'
-#        connectedServiceName: 'vs-marketplace-blockworks-com'
-#        fileType: 'vsix'
-#        vsixFile: '*-DEV*.vsix'
-#        extensionVisibility: 'private'
-#        extensionPricing: 'free'
-#        shareWith: 'dev2-blockworkscom'
+    - task: PublishAzureDevOpsExtension@2
+      inputs:
+        connectTo: 'VsTeam'
+        connectedServiceName: 'vs-marketplace-blockworks-com'
+        fileType: 'vsix'
+        vsixFile: '*-DEV*.vsix'
+        extensionVisibility: 'private'
+        extensionPricing: 'free'
+        shareWith: 'dev2-blockworkscom'
