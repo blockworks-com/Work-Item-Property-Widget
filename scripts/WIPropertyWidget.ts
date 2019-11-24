@@ -112,6 +112,12 @@ export class WidgetWIProperty {
             $("#loadingwidget").hide();
             $("#contentError").hide();
             $("#configwidget").show();
+
+            logger("LoadWI", "no settings");
+            logger("LoadWI", "before telemetry call");
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
+            logger("LoadWI", "after telemetry call");
+
         }
         return this.WidgetHelpers.WidgetStatusHelper.Success();
     }
