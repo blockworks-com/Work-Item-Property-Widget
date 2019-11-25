@@ -33,7 +33,7 @@
     "jquery": "^3.4.0",
     "jquery-dotdotdot": "^1.8.2",
     "moment": "^2.24.0",
-    "telemetryclient-team-services-extension": "*",
+    "telemetryclient-team-services-extension": "^1.0.10",
     "vss-web-extension-sdk": "^2.117.0"
   },
   "name": "wiproperty",
