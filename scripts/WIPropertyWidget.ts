@@ -35,6 +35,7 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
+        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("LoadWI");
         logger("LoadWI", "step 10");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
         let $title = $("h2");
@@ -115,7 +116,7 @@ export class WidgetWIProperty {
 
             logger("LoadWI", "no settings");
             logger("LoadWI", "before telemetry call");
-            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("LoadWI no settings");
             logger("LoadWI", "after telemetry call");
 
         }
