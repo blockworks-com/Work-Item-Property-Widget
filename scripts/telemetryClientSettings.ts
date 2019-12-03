@@ -13,7 +13,7 @@
 import * as tc from "telemetryclient-team-services-extension";
 
 export const settings: tc.TelemetryClientSettings = {
-    key: "e4104431-5dae-465d-b7dc-cbe5bb367d95",
+    key: "d635f4d1-5dc2-4dab-b7eb-baef42d1555d",
     extensioncontext: "WorkItemPropertyWidget",
     disableTelemetry: "false",
     disableAjaxTracking: "true",
