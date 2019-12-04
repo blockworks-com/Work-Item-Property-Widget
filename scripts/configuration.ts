@@ -64,7 +64,7 @@ export class Configuration {
 
         logger("load", "enabletelemetry (using settings) = " + _that.$enableTelemetry);
         if (_that.$enableTelemetry) {
-            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Config");
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Starting Configuration");
         }
 
         this.widgetConfigurationContext = widgetConfigurationContext;
@@ -316,6 +316,9 @@ export class Configuration {
             });
         });
 
+        if (_that.$enableTelemetry) {
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Finished Configuration");
+        }
         return _that.WidgetHelpers.WidgetStatusHelper.Success();
     }
 

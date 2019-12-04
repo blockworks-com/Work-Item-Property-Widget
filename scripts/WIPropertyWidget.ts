@@ -35,7 +35,7 @@ export class WidgetWIProperty {
     public clientwi = RestClientWI.getClient();
 
     public LoadWI(widgetSettings) {
-        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("LoadWI");
+        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Starting to load Work Item");
         logger("LoadWI", "step 10");
         logger("LoadWI", "step 11");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
@@ -43,29 +43,23 @@ export class WidgetWIProperty {
         let $title = $("h2");
         $title.text(widgetSettings.name);
         if (customSettings) {
-            logger("LoadWI", "before checking enableDebug");
-            if (typeof customSettings.enableDebug !== "undefined") {
-                logger("LoadWI", "enableDebug is defined");
-                logger("LoadWI", "debug = " + customSettings.enableDebug);
-                DEBUG = customSettings.enableDebug;
-            } else {
-                logger("LoadWI", "enableDebug is undefined");
+            if (typeof customSettings.enableDebug == "undefined") {
+                customSettings.enableDebug = true;
+                logger("LoadWI", "enableDebug is undefined so set to " + customSettings.enableDebug);
             }
-            logger("LoadWI", "step 14: debug = " + DEBUG);
-            logger("LoadWI", "after checking enableDebug");
+            logger("LoadWI", "debug = " + customSettings.enableDebug);
+            DEBUG = customSettings.enableDebug;
 
-            logger("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
-            if (customSettings.enableTelemetry === null) {
-                logger("LoadWI", "step 15: enableTelemetry is null");
+            if (typeof customSettings.enableTelemetry == "undefined") {
+                customSettings.enableTelemetry = true;
+                logger("LoadWI", "enableTelemtry is undefined so set to " + customSettings.enableTelemetry);
             }
-            else {
-                logger("LoadWI", "step 16: enableTelemtry is NOT null");
-            }
-            if (customSettings.enableTelemetry) {
-                logger("LoadWI", "before call to telemetry");
+            logger("LoadWI", "enableTelemetry = " + customSettings.enableTelemetry);
+//            if (customSettings.enableTelemetry) {
+//                logger("LoadWI", "before call to telemetry");
 //                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
 //                logger("LoadWI", "after call to telemetry");
-            }
+//            }
 
             $("#configwidget").hide();
             $("#loadingwidget").show();
@@ -85,10 +79,10 @@ export class WidgetWIProperty {
                 logger("LoadWI", "values: " + $msg);
 
                 if (customSettings.enableTelemetry) {
-                    if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color"); }
-                    if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat"); }
-                    if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title"); }
-                    if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty"); }
+                    if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color is being used"); }
+                    if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat is being used"); }
+                    if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title is being used"); }
+                    if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty is being used"); }
                     // Do not log wiPropertyName because it's required
                     // Do not log wiid because it's required
                     // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
@@ -96,6 +90,7 @@ export class WidgetWIProperty {
                 }
 
                 this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
+
                 $("#loadingwidget").hide();
                 $("#content").show();
 
@@ -121,7 +116,6 @@ export class WidgetWIProperty {
                 logger("LoadWI", "Exception: " + reject.response);
                 tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
             });
-
         } else {
             $title.attr("style", "color:grey");
             $("#content").hide();
@@ -130,11 +124,10 @@ export class WidgetWIProperty {
             $("#configwidget").show();
 
             logger("LoadWI", "no settings");
-            logger("LoadWI", "before telemetry call");
-            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("LoadWI no settings");
-            logger("LoadWI", "after telemetry call");
-
+            tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("No settings configured");
         }
+
+        tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Finished loading Work Item");
         return this.WidgetHelpers.WidgetStatusHelper.Success();
     }
 
@@ -177,7 +170,7 @@ export class WidgetWIProperty {
             $("#wi-desc").html(desc);
             if (dateFormat !== "") {
                 if (moment(desc).isValid()) {
-                    logger("DisplayWI", "format date: " + moment(desc).format("MMM DD YYYY"));
+                    logger("DisplayWI", "format date: " + moment(desc).format(dateFormat));
                     logger("DisplayWI", "check if valid date: " + moment(desc).isValid() + "; " + desc);
                     $("#wi-desc").html(moment(desc).format(dateFormat));
                 }
@@ -347,7 +340,7 @@ export class WidgetWIProperty {
 }
 
 VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
-    logger("", "step 61");
+    logger("", "step 1");
     WidgetHelpers.IncludeWidgetStyles();
     VSS.register("wipropertywidget", () => {
         let widgetProperty = new WidgetWIProperty(WidgetHelpers);
