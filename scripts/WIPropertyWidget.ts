@@ -37,15 +37,25 @@ export class WidgetWIProperty {
     public LoadWI(widgetSettings) {
         tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("LoadWI");
         logger("LoadWI", "step 10");
+        logger("LoadWI", "step 11");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
+        logger("LoadWI", "step 12");
         let $title = $("h2");
         $title.text(widgetSettings.name);
         if (customSettings) {
             if (customSettings.enableDebug !== null) {
+                logger("LoadWI", "debug = " + customSettings.enableDebug);
                 DEBUG = customSettings.enableDebug;
             }
+            logger("LoadWI", "step 14: debug = " + DEBUG);
 
             logger("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
+            if (customSettings.enableTelemetry === null) {
+                logger("LoadWI", "step 15: enableTelemetry is null");
+            }
+            else {
+                logger("LoadWI", "step 16: enableTelemtry is NOT null");
+            }
             if (customSettings.enableTelemetry) {
                 logger("LoadWI", "before call to telemetry");
 //                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Index");
