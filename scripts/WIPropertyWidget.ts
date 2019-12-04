@@ -43,11 +43,16 @@ export class WidgetWIProperty {
         let $title = $("h2");
         $title.text(widgetSettings.name);
         if (customSettings) {
-            if (customSettings.enableDebug !== null) {
+            logger("LoadWI", "before checking enableDebug");
+            if (typeof customSettings.enableDebug !== 'undefined') {
+                logger("LoadWI", "enableDebug is defined");
                 logger("LoadWI", "debug = " + customSettings.enableDebug);
                 DEBUG = customSettings.enableDebug;
+            } else {
+                logger("LoadWI", "enableDebug is undefined"); 
             }
             logger("LoadWI", "step 14: debug = " + DEBUG);
+            logger("LoadWI", "after checking enableDebug");
 
             logger("LoadWI", "enabletelemetry = " + customSettings.enableTelemetry);
             if (customSettings.enableTelemetry === null) {
