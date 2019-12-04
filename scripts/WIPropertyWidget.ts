@@ -44,12 +44,12 @@ export class WidgetWIProperty {
         $title.text(widgetSettings.name);
         if (customSettings) {
             logger("LoadWI", "before checking enableDebug");
-            if (typeof customSettings.enableDebug !== 'undefined') {
+            if (typeof customSettings.enableDebug !== "undefined") {
                 logger("LoadWI", "enableDebug is defined");
                 logger("LoadWI", "debug = " + customSettings.enableDebug);
                 DEBUG = customSettings.enableDebug;
             } else {
-                logger("LoadWI", "enableDebug is undefined"); 
+                logger("LoadWI", "enableDebug is undefined");
             }
             logger("LoadWI", "step 14: debug = " + DEBUG);
             logger("LoadWI", "after checking enableDebug");
