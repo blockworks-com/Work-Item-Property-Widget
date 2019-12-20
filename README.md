@@ -68,8 +68,8 @@ We also collect some telemetry data using Application Insights ("AI"). As part o
 ## Notices
 Notices for certain third party software included in this solution are provided here: [Third Party Notice](ThirdPartyNotices.txt).
 
-## Contribute
-All contributions from the GitHub community are welcome. 
+## Contribute 
+All contributions from the GitHub community are welcome.
 
 - Submit bugs and help us verify fixes  
 - Submit pull requests for bug fixes and features and discuss existing proposals   
