@@ -4,11 +4,6 @@ This is a fork of https://github.com/ALM-Rangers/Work-Item-Details-Widget-Extens
 
 Requires using Typescript 2.3.4
 
-
-The **Work Item Property Widget** displays a card showing the property selected on your dashboards.
-
-![detailed cards](static/images/detailed-cards.png)
-
 ## Work Item Property Widget ##
 
 The **Work Item Property Widget** displays a card showing the property selected on your dashboards. You select the work item and which property to display.
