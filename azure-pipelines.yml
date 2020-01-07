@@ -23,7 +23,7 @@ stages:
           **\*.ts
           **\*.js
         FindRegex: '__INSTRUMENTATIONKEY__'
-        ReplaceRegex: '$(TelemetryKey)'
+        ReplaceRegex: '$(TelemetryKey-DEVdsf)'
         UseUTF8: false
         UseRAW: true
     - task: TfxInstaller@2
