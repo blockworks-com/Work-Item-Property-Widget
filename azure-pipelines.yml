@@ -29,7 +29,7 @@ stages:
         InputSearchPattern: |
           **\*.ts
         FindRegex: '__INSTRUMENTATIONKEY__'
-        ReplaceRegex: '$(TelemetryKey)'
+        ReplaceRegex: '$(TelemetryKey-PROD)'
         UseUTF8: false
         UseRAW: true
     - task: Npm@1
@@ -46,6 +46,14 @@ stages:
         updateTasksId: true
         extensionVisibility: 'private'
         extensionPricing: 'free'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          *.vsix
+          *.zip
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
+        cleanTargetFolder: true
 
 # QA Second
     - task: RegexReplace@3
@@ -93,6 +101,14 @@ stages:
         updateTasksVersion: true
         extensionVisibility: 'private'
         extensionPricing: 'free'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          *.vsix
+          *.zip
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
+        cleanTargetFolder: true
 
 # DEV Third
     - task: RegexReplace@3
@@ -140,6 +156,14 @@ stages:
         updateTasksVersion: true
         extensionVisibility: 'private'
         extensionPricing: 'free'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          *.vsix
+          *.zip
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
+        cleanTargetFolder: true
 
 # Continue with common tasks
 
@@ -155,14 +179,6 @@ stages:
 #        archiveType: 'zip'
 #        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Build.BuildNumber)_release.zip'
 #        replaceExistingArchive: true
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(Build.SourcesDirectory)'
-        Contents: |
-          *.vsix
-          *.zip
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
-        cleanTargetFolder: true
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(Build.ArtifactStagingDirectory)/release
