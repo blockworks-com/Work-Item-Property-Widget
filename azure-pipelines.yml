@@ -64,7 +64,7 @@ stages:
       inputs:
         InputSearchPattern: |
           **\*.ts
-        FindRegex: '__INSTRUMENTATIONKEY__'
+        FindRegex: '$(TelemetryKey-PROD)'
         ReplaceRegex: '$(TelemetryKey-QA)'
         UseUTF8: false
         UseRAW: true
@@ -123,7 +123,7 @@ stages:
       inputs:
         InputSearchPattern: |
           **\*.ts
-        FindRegex: '__INSTRUMENTATIONKEY__'
+        FindRegex: '$(TelemetryKey-QA)'
         ReplaceRegex: '$(TelemetryKey-DEV)'
         UseUTF8: false
         UseRAW: true
