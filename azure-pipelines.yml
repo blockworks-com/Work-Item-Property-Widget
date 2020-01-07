@@ -54,6 +54,10 @@ stages:
           *.zip
         TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
         cleanTargetFolder: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)/release
+        artifactName: release
 
 # QA Second
     - task: RegexReplace@3
@@ -109,6 +113,10 @@ stages:
           *.zip
         TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
         cleanTargetFolder: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)/release
+        artifactName: release
 
 # DEV Third
     - task: RegexReplace@3
@@ -164,6 +172,10 @@ stages:
           *.zip
         TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
         cleanTargetFolder: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)/release
+        artifactName: release
 
 # Continue with common tasks
 
@@ -179,10 +191,6 @@ stages:
 #        archiveType: 'zip'
 #        archiveFile: '$(Build.SourcesDirectory)/$(Build.DefinitionName)_$(Build.BuildNumber)_release.zip'
 #        replaceExistingArchive: true
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathToPublish: $(Build.ArtifactStagingDirectory)/release
-        artifactName: release
 
 # Publish DEV only in CI
     - task: PublishAzureDevOpsExtension@2
