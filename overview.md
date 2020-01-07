@@ -1,8 +1,24 @@
 ## Work Item Property Widget ##
 
-The **Work Item Property Widget** displays a card showing the property selected on your dashboards.
+The **Work Item Property Widget** displays a card showing the property selected on your dashboards. You select the work item and which property to display.
+
+There are times when you have a parent or central work item that contains information that you want displayed on multiple dashboards. Instead of adding static content to each dashboard, this widget allows you to display information from the work item and then maintain the information in one location. 
 
 ![detailed cards](static/images/detailed-cards.png)
+
+## Use Cases
+
+### Project Overview / Product Vision
+You have a work item that contains an overview of the project. This might be a product vision that is shared across multiple teams and/or multiple projects. Display the project overview or product vision on many dashboards, while still only maintaining the content in the single work item. 
+
+### Project Status
+You have a Project work item that contains current status for a status report. Instead of maintaining the status separately, maintain it in the Project work item and display the status on the dashboard with other key information, such as burndown, so it's available for everyone on the team to view.
+
+### Fill Title with Status Color
+Your widget displays the progress for the project and you also have a progress-color property. Instead of have a separate widget displaying the progress-color, show it with the progress. After selecting the work item id and propery field then also select progress-color property for the Title Status Color. The background color of the Title is set to the specified property. Only the background of the title is set and the remainder of the widget is unaffected. 
+
+### (New) Target Date
+In the latest version of this widget, you can now specify the date format to display a date field. This is typically used when you want to display your Target Date or Go-Live Date on the dashboard. It uses the standard javascript formats, such as 'MMM DD YYYY'. The date format option only applies if the selected property is a date.
 
 ## Quick steps to get started
 
@@ -45,16 +61,3 @@ We also collect some telemetry data using Application Insights ("AI"). As part o
 
 ## Notices
 Notices for certain third party software included in this solution are provided here: [Third Party Notice](ThirdPartyNotices.txt).
-
-## Contribute
-All contributions from the GitHub community are welcome.
-
-- Submit bugs and help us verify fixes  
-- Submit pull requests for bug fixes and features and discuss existing proposals   
-- Fork the repository
-- Create a feature branch: `git checkout -b new-feature`
-- Commit your changes
-- Push to the branch: `git push origin new-feature`
-- Submit a Pull Request
-
-Please refer to [Contribution guidelines](.github/CONTRIBUTING.md) and the [Code of Conduct](.github/COC.md) for more details.
