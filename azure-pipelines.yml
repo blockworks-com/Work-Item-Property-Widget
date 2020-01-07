@@ -17,26 +17,26 @@ stages:
     pool:
       vmImage: 'vs2017-win2016'
     steps:
-    - task: RegexReplace@3
-      inputs:
-        InputSearchPattern: |
-          **\*.ts
-          **\*.js
-        FindRegex: '__INSTRUMENTATIONKEY__'
-        ReplaceRegex: '$(TelemetryKey-DEV)'
-        UseUTF8: false
-        UseRAW: true
     - task: TfxInstaller@2
       inputs:
         version: 'v0.6.x'
     - task: Npm@1
       inputs:
         command: 'install'
+  # Prod First
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: |
+          **\*.ts
+          **\*.js
+        FindRegex: '__INSTRUMENTATIONKEY__'
+        ReplaceRegex: '$(TelemetryKey)'
+        UseUTF8: false
+        UseRAW: true
     - task: Npm@1
       inputs:
         command: 'custom'
         customCommand: 'run build'
-  # Prod First
     - task: PackageAzureDevOpsExtension@2
       inputs:
         rootFolder: '$(Build.SourcesDirectory)'
@@ -49,6 +49,19 @@ stages:
         extensionPricing: 'free'
 
 # QA Second
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: |
+          **\*.ts
+          **\*.js
+        FindRegex: '__INSTRUMENTATIONKEY__'
+        ReplaceRegex: '$(TelemetryKey-QA)'
+        UseUTF8: false
+        UseRAW: true
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
     - task: RegexReplace@3
       inputs:
         InputSearchPattern: 'vss-extension.json'
@@ -84,6 +97,19 @@ stages:
         extensionPricing: 'free'
 
 # DEV Third
+    - task: RegexReplace@3
+      inputs:
+        InputSearchPattern: |
+          **\*.ts
+          **\*.js
+        FindRegex: '__INSTRUMENTATIONKEY__'
+        ReplaceRegex: '$(TelemetryKey-DEV)'
+        UseUTF8: false
+        UseRAW: true
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
     - task: RegexReplace@3
       inputs:
         InputSearchPattern: 'vss-extension.json'
