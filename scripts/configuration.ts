@@ -181,8 +181,8 @@ export class Configuration {
 
                 $errorSingleLineInput.parent().css("visibility", "hidden");
 
-                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
-                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
+//                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+//                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
 
             }, (reject) => {
                 if (reject.status = "404") {
