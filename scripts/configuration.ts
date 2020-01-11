@@ -161,7 +161,8 @@ export class Configuration {
 
             }, (reject) => {
                 if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item dosn't exist.");
+                    logger("$wiid.blur", "This Work item doesn't exist (case 1)");
+                    $errorSingleLineInput.text("This Work item doesn't exist.");
                     $errorSingleLineInput.parent().css("visibility", "visible");
                     $(".btn-cta").attr("disabled", "disabled");
 
@@ -183,7 +184,8 @@ export class Configuration {
 
             }, (reject) => {
                 if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item dosn't exist.");
+                    logger("$wiid.blur", "This Work item doesn't exist (case 2)");
+                    $errorSingleLineInput.text("This Work item doesn't exist.");
                     $errorSingleLineInput.parent().css("visibility", "visible");
                     $(".btn-cta").attr("disabled", "disabled");
 
@@ -205,7 +207,8 @@ export class Configuration {
 
             }, (reject) => {
                 if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item dosn't exist.");
+                    logger("$wiid.blur", "This Work item doesn't exist (case 3)");
+                    $errorSingleLineInput.text("This Work item doesn't exist.");
                     $errorSingleLineInput.parent().css("visibility", "visible");
                     $(".btn-cta").attr("disabled", "disabled");
 
@@ -227,7 +230,8 @@ export class Configuration {
 
             }, (reject) => {
                 if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item dosn't exist.");
+                    logger("$wiid.blur", "This Work item doesn't exist (case 4)");
+                    $errorSingleLineInput.text("This Work item doesn't exist.");
                     $errorSingleLineInput.parent().css("visibility", "visible");
                     $(".btn-cta").attr("disabled", "disabled");
 
@@ -249,7 +253,8 @@ export class Configuration {
 
             }, (reject) => {
                 if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item dosn't exist.");
+                    logger("$wiid.blur", "This Work item doesn't exist (case 5)");
+                    $errorSingleLineInput.text("This Work item doesn't exist.");
                     $errorSingleLineInput.parent().css("visibility", "visible");
                     $(".btn-cta").attr("disabled", "disabled");
 
