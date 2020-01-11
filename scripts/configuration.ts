@@ -395,9 +395,7 @@ export class Configuration {
     }
 
     public getCustomSettings() {
-        logger("getCustomSettings",
-            "wiId: " + $("#wiid").val() + "; " +  
-            "wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked") + "; enableDebug: " + this.$enableDebug.is(":checked"));
+        logger("getCustomSettings", "wiId: " + $("#wiid").val() + "; wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked") + "; enableDebug: " + this.$enableDebug.is(":checked"));
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
