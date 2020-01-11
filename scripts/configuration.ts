@@ -272,6 +272,7 @@ export class Configuration {
             this.clientwi.getWorkItem($("#wiid").val()).then((wi) => {
                 deferred.resolve(true);
             }, (reject) => {
+                logger("isValidWI", "Error: " + reject.Status);
                 if (reject.status = "404") {
                     deferred.resolve(false);
                 }

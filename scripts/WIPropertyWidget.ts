@@ -37,7 +37,6 @@ export class WidgetWIProperty {
     public LoadWI(widgetSettings) {
         tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Starting to load Work Item");
         logger("LoadWI", "step 10");
-        logger("LoadWI", "step 11");
         let customSettings = <ISettings>JSON.parse(widgetSettings.customSettings.data);
         logger("LoadWI", "step 12");
         let $title = $("h2");
@@ -67,6 +66,7 @@ export class WidgetWIProperty {
             $("#contentError").hide();
 
             // Main
+            logger("LoadWI", "wiId = " + customSettings.wiId);
             this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
                 let $msg = "propertyName = " + customSettings.wiPropertyName + ";"
                     + " color prop = " + customSettings.wiColorPropertyName + ";"
@@ -113,7 +113,7 @@ export class WidgetWIProperty {
                 } else {
                     $("#contentError").html(reject.message);
                 }
-                logger("LoadWI", "Exception: " + reject.response);
+                logger("LoadWI", "Exception: " + reject.message);
                 tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
             });
         } else {
