@@ -177,101 +177,29 @@ export class Configuration {
         $errorSingleLineInput = $("#linetitle .validation-error-text");
         _that.$title.blur(() => {
             logger("load", "linetitle:blur");
-            this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-
-                $errorSingleLineInput.parent().css("visibility", "hidden");
-
-//                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
-//                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
-
-            }, (reject) => {
-                if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item doesn't exist.");
-                    $errorSingleLineInput.parent().css("visibility", "visible");
-                    $(".btn-cta").attr("disabled", "disabled");
-
-                    logger("linetitle.blur", "Error: " + $errorSingleLineInput.text());
-                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException($errorSingleLineInput.text());
-
-                    return _that.WidgetHelpers.WidgetStatusHelper.Failure();
-
-                }
-            });
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
         $errorSingleLineInput = $("#dropdownproperty .validation-error-text");
         _that.$wipropertyname.blur(() => {
             logger("load", "dropdownproperty:blur");
-            this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-
-                $errorSingleLineInput.parent().css("visibility", "hidden");
-
-                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
-                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
-
-            }, (reject) => {
-                if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item doesn't exist.");
-                    $errorSingleLineInput.parent().css("visibility", "visible");
-                    $(".btn-cta").attr("disabled", "disabled");
-
-                    logger("dropdownproperty.blur", "Error: " + $errorSingleLineInput.text());
-                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException($errorSingleLineInput.text());
-
-                    return _that.WidgetHelpers.WidgetStatusHelper.Failure();
-
-                }
-            });
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
         $errorSingleLineInput = $("#dropdowncolorproperty .validation-error-text");
         _that.$wicolorpropertyname.blur(() => {
             logger("load", "dropdowncolorproperty:blur");
-            this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-
-                $errorSingleLineInput.parent().css("visibility", "hidden");
-
-                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
-                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
-
-            }, (reject) => {
-                if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item doesn't exist.");
-                    $errorSingleLineInput.parent().css("visibility", "visible");
-                    $(".btn-cta").attr("disabled", "disabled");
-
-                    logger("dropdowncolorproperty.blur", "Error: " + $errorSingleLineInput.text());
-                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException($errorSingleLineInput.text());
-
-                    return _that.WidgetHelpers.WidgetStatusHelper.Failure();
-
-                }
-            });
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
         $errorSingleLineInput = $("#linedateformat .validation-error-text");
         _that.$dateFormat.blur(() => {
             logger("load", "linedateformat:blur");
-            this.clientwi.getWorkItem($wiid.val()).then((wi) => {
-
-                $errorSingleLineInput.parent().css("visibility", "hidden");
-
-                _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
-                    _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
-
-            }, (reject) => {
-                if (reject.status = "404") {
-                    $errorSingleLineInput.text("This Work item doesn't exist.");
-                    $errorSingleLineInput.parent().css("visibility", "visible");
-                    $(".btn-cta").attr("disabled", "disabled");
-
-                    logger("linedateformat.blur", "Error: " + $errorSingleLineInput.text());
-                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException($errorSingleLineInput.text());
-
-                    return _that.WidgetHelpers.WidgetStatusHelper.Failure();
-
-                }
-            });
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
         $errorSingleLineInput = $("#lineenableTelemetry .validation-error-text");
@@ -291,7 +219,6 @@ export class Configuration {
         $errorSingleLineInput = $("#lineenableDebug .validation-error-text");
         _that.$enableDebug.blur(() => {
             logger("load", "lineenableDebug:blur");
-
             _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
                 _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
