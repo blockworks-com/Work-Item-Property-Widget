@@ -67,55 +67,64 @@ export class WidgetWIProperty {
 
             // Main
             logger("LoadWI", "wiId = " + customSettings.wiId);
-            this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
-                let $msg = "propertyName = " + customSettings.wiPropertyName + ";"
-                    + " color prop = " + customSettings.wiColorPropertyName + ";"
-                    + " color = " + customSettings.color + ";"
-                    + " title = " + customSettings.title + ";"
-                    + " dateFormat = " + customSettings.dateFormat + ";"
-                    + " enableTelemetry = " + customSettings.enableTelemetry + ";"
-                    + " enableDebug = " + customSettings.enableDebug + ";"
-                    ;
-                logger("LoadWI", "values: " + $msg);
+            if (customSettings.wiId) {
+                this.clientwi.getWorkItem(customSettings.wiId).then((wi) => {
+                    let $msg = "propertyName = " + customSettings.wiPropertyName + ";"
+                        + " color prop = " + customSettings.wiColorPropertyName + ";"
+                        + " color = " + customSettings.color + ";"
+                        + " title = " + customSettings.title + ";"
+                        + " dateFormat = " + customSettings.dateFormat + ";"
+                        + " enableTelemetry = " + customSettings.enableTelemetry + ";"
+                        + " enableDebug = " + customSettings.enableDebug + ";"
+                        ;
+                    logger("LoadWI", "values: " + $msg);
 
-                if (customSettings.enableTelemetry) {
-                    if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color is being used"); }
-                    if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat is being used"); }
-                    if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title is being used"); }
-                    if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty is being used"); }
-                    // Do not log wiPropertyName because it's required
-                    // Do not log wiid because it's required
-                    // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
-                    // Do not log enableDebug because usage doesn't matter
-                }
+                    if (customSettings.enableTelemetry) {
+                        if (customSettings.color !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Color is being used"); }
+                        if (customSettings.dateFormat !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("DateFormat is being used"); }
+                        if (customSettings.title !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("Title is being used"); }
+                        if (customSettings.wiColorPropertyName !== "") { tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackPageView("ColorProperty is being used"); }
+                        // Do not log wiPropertyName because it's required
+                        // Do not log wiid because it's required
+                        // Do not log enableTelemetry because if usage is logged then we know telemetry is enabled.
+                        // Do not log enableDebug because usage doesn't matter
+                    }
 
-                this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
+                    this.DisplayWI(wi, customSettings.wiPropertyName, customSettings.wiColorPropertyName, customSettings.color, customSettings.title, customSettings.dateFormat);
 
-                $("#loadingwidget").hide();
-                $("#content").show();
+                    $("#loadingwidget").hide();
+                    $("#content").show();
 
-                $("#wi-title").dotdotdot();
-                $("#wi-desc").dotdotdot();
+                    $("#wi-title").dotdotdot();
+                    $("#wi-desc").dotdotdot();
 
-                $(".widget").off(); // remove other click event load+reload where configure => prevent multiple windows
-                $(".widget").on("click", function () {
-                    WorkItemServices.WorkItemFormNavigationService.getService().then(service => {
-                        service.openWorkItem(customSettings.wiId, false); // open the wi dialog
+                    $(".widget").off(); // remove other click event load+reload where configure => prevent multiple windows
+                    $(".widget").on("click", function () {
+                        WorkItemServices.WorkItemFormNavigationService.getService().then(service => {
+                            service.openWorkItem(customSettings.wiId, false); // open the wi dialog
+                        });
                     });
-                });
 
-            }, (reject) => {
+                }, (reject) => {
+                    $("#loadingwidget").hide();
+                    $("#contentError").attr("style", "display:block;margin:10px;");
+                    $("#contentError").addClass("error");
+                    if (reject.status === "404") {
+                        $("#contentError").html("TF401232: Work item Id: " + customSettings.wiId + " does not exist, or you do not have permissions to read it.");
+                    } else {
+                        $("#contentError").html(reject.message);
+                    }
+                    logger("LoadWI", "Exception: " + reject.message);
+                    tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
+                });
+            } else {
                 $("#loadingwidget").hide();
                 $("#contentError").attr("style", "display:block;margin:10px;");
                 $("#contentError").addClass("error");
-                if (reject.status === "404") {
-                    $("#contentError").html("TF401232: Work item Id: " + customSettings.wiId + " does not exist, or you do not have permissions to read it.");
-                } else {
-                    $("#contentError").html(reject.message);
-                }
-                logger("LoadWI", "Exception: " + reject.message);
-                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException(reject.message);
-            });
+                $("#contentError").html("Work Item Id has not been configured.");
+                logger("LoadWI", "Exception: Work Item Id has not been configured.");
+                tc.TelemetryClient.getClient(telemetryClientSettings.settings).trackException("Work Item Id has not been configured.");
+            }
         } else {
             $title.attr("style", "color:grey");
             $("#content").hide();
