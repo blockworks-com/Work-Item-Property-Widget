@@ -197,6 +197,13 @@ export class Configuration {
                 _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
+        $errorSingleLineInput = $("#linecolor .validation-error-text");
+        _that.$color.blur(() => {
+            logger("load", "linecolor:blur");
+            _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
+                _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
+        });
+
         $errorSingleLineInput = $("#linedateformat .validation-error-text");
         _that.$dateFormat.blur(() => {
             logger("load", "linedateformat:blur");
