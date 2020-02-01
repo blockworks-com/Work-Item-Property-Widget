@@ -58,7 +58,7 @@ export class Configuration {
         let $wicolorpropertyname = $("#wicolorpropertyname");
         let $color = $("#color");
         let $title = $("#title");
-        let $dateFormat = $("dateFormat");
+        let $dateFormat = $("#dateFormat");
         let $enableTelemetry = $("#enableTelemetry");
         let $enableDebug = $("#enableDebug");
 
