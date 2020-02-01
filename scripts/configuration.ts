@@ -101,8 +101,10 @@ export class Configuration {
             $title.val("");
         }
         if (settings && settings.dateFormat) {
+            logger("load", "dateFormat: " + settings.dateFormat);
             $dateFormat.val(settings.dateFormat);
         } else {
+            logger("load", "dateFormat does not exist in settings");
             // first load
             $dateFormat.val("");
         }
@@ -396,7 +398,7 @@ export class Configuration {
     }
 
     public getCustomSettings() {
-        logger("getCustomSettings", "wiId: " + $("#wiid").val() + "; wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; dateFormat: " + this.$dateFormat + "; enableTelemetry: " + this.$enableTelemetry.is(":checked") + "; enableDebug: " + this.$enableDebug.is(":checked"));
+        logger("getCustomSettings", "wiId: " + $("#wiid").val() + "; wipropertyname: " + this.$wipropertyname.val() + "; wicolorpropertyname: " + this.$wicolorpropertyname.val() + "; dateFormat: " + this.$dateFormat.val() + "; enableTelemetry: " + this.$enableTelemetry.is(":checked") + "; enableDebug: " + this.$enableDebug.is(":checked"));
         let result = { data: JSON.stringify(<ISettings>{
             wiId: $("#wiid").val(),
             wiPropertyName: $("#wipropertyname").val(),
@@ -426,10 +428,10 @@ export class Configuration {
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
         if ($("#wipropertyname").val() === "") {
-            let $errorSingleLineInput = $("#linedropdownproperty .validation-error-text");
-            $errorSingleLineInput.text("The Property Name is required");
-            $errorSingleLineInput.parent().css("visibility", "visible");
-            return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
+            // let $errorSingleLineInput = $("#linedropdownproperty .validation-error-text");
+            // $errorSingleLineInput.text("The Property Name is required");
+            // $errorSingleLineInput.parent().css("visibility", "visible");
+            // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
         if ($("#wicolorpropertyname").val() === "") {
             // let $errorSingleLineInput = $("#linecolor .validation-error-text");
