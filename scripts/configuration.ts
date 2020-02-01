@@ -181,7 +181,7 @@ export class Configuration {
                 _that.WidgetHelpers.WidgetEvent.Args(_that.getCustomSettings()));
         });
 
-        $errorSingleLineInput = $("#dropdownproperty .validation-error-text");
+        $errorSingleLineInput = $("#linedropdownproperty .validation-error-text");
         _that.$wipropertyname.blur(() => {
             logger("load", "dropdownproperty:blur");
             _that.widgetConfigurationContext.notify(_that.WidgetHelpers.WidgetEvent.ConfigurationChange,
@@ -426,7 +426,7 @@ export class Configuration {
             // return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
         }
         if ($("#wipropertyname").val() === "") {
-            let $errorSingleLineInput = $("#lineproperty .validation-error-text");
+            let $errorSingleLineInput = $("#linedropdownproperty .validation-error-text");
             $errorSingleLineInput.text("The Property Name is required");
             $errorSingleLineInput.parent().css("visibility", "visible");
             return this.WidgetHelpers.WidgetConfigurationSave.Invalid();
