@@ -15,7 +15,7 @@
     "cpx": "^1.5.0",
     "jasmine": "^2.5.1",
     "rimraf": "^2.5.4",
-    "tfx-cli": "^0.6.4",
+    "tfx-cli": "^0.12.0",
     "ts-loader": "^2.0.3",
     "tslint": "^4.3.1",
     "tslint-loader": "^3.3.0",
